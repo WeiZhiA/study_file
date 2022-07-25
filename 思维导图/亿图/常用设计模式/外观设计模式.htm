@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- saved from url=(0016)http://localhost -->
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>外观设计模式</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #content-info{
+            width: auto;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #author-info{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        #title{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding-top: 10px;
+            margin-bottom: 2px;
+            font-size: 34px;
+            color: #505050;
+        }
+        .text{
+            white-space:nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 2px;
+            font-size: 20px;
+            color: #8c8c8c;
+        }
+        #navBar{
+            position: fixed;
+            right:0;
+            bottom: 0;
+            background-color: #f0f3f4;
+            overflow-y: auto;
+            text-align: center;
+        }
+        #svg-container{
+            width: 100%;
+            min-width: 0;
+            margin: 0 10px;
+        }
+        #nav-thumbs{
+            padding: 0 5px;
+        }
+        .nav-thumb{
+            position: relative;
+            margin: 10px auto;
+        }
+        .nav-thumb >p{
+            text-align: center;
+            font-size: 12px;
+            margin: 4px 0 0 0;
+        }
+        .nav-thumb >div{
+            position: relative;
+            display: inline-block;
+            border: 1px solid #c6cfd5;
+        }
+        .nav-thumb img{
+            display: block;
+        }
+        .nav-thumb span{
+            pointer-events: none;
+        }
+        #main-content{
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #d0cfd8;
+            display: flex;
+            height: auto;
+            flex-flow: row wrap;
+            text-align:center;
+        }
+        #svg-container >svg{
+            display: block;
+            margin:10px auto;
+            margin-bottom: 0;
+        }
+        #copyright{
+            bottom: 0;
+            left: 50%;
+            margin: 5px auto;
+            font-size: 16px;
+            color: #515151;
+        }
+        #copyright >a{
+            text-decoration: none;
+            color: #77C;
+        }
+        .number{
+            position: absolute;
+            top:0;
+            left:0;
+            border-top:22px solid #76838f;
+            border-right: 22px solid transparent;
+        }
+        .pagenum{
+            font-size: 12px;
+            color: #fff;
+            position: absolute;
+            top: -23px;
+            left: 2px;
+        }
+        #navBar::-webkit-scrollbar{
+            width: 8px;
+            background-color: #f5f5f5;
+        }
+        #navBar::-webkit-scrollbar-track{
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        #navBar::-webkit-scrollbar-thumb{
+            border-radius: 8px;
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            background-color: #6b6b70;
+        }
+        #navBar::-webkit-scrollbar-thumb:hover{
+            background-color: #4a4a4f;
+        }
+        .nav-thumb >div:hover{
+            box-shadow:1px 1px 4px rgba(0,0,0,.4);
+        }
+        .selected .number{
+            border-color: #08a1ef transparent;
+        }
+</style>
+  </head>
+  <body>
+    <div id="main-area">
+      <div id="content-info">
+        <div id="title">外观设计模式</div>
+        <div id="author-info">
+          <div class="text" id="author-name">Administrator</div>
+          <div class="text" id="share-time">2019-09-01</div>
+        </div>
+      </div>
+      <div id="main-content">
+        <div id="svg-container"><svg width="2245" xmlns:xlink="http://www.w3.org/1999/xlink" height="793" xmlns:ev="http://www.w3.org/2001/xml-events" viewBox="0 0 2245 794" id="page1" preserveAspectRadio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg"><style type="text/css"><![CDATA[
+.st1 {fill:#000000;font-family:Arial;font-size:10pt}
+.st3 {fill:#1f6391;font-family:宋体;font-size:10pt}
+.st5 {fill:#236ea1;font-family:宋体;font-size:10pt}
+.st2 {fill:#ff0000}
+.st4 {font-family:SimSun;font-size:9pt}
+]]></style><defs/><rect width="2245" fill="#ffffff" y="0" height="794" x="0" stroke="#808080"/><g transform="translate(293,99)" id="shape1"><path fill="#ffffff" d="M388.8,24L388.8,0L0,0L0,24L388.8,24z" stroke="#ffffff"/><text class="st1"><tspan y="16.4" x="6.8">外观设计模式（门面模式）  - -侧重于功能的封装，不改变行为</tspan></text></g><g transform="translate(935,99)" id="shape2"><path fill="#ffffff" d="M671,265L671,0L0,0L0,265L671,265z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.4">实际场景：</tspan><tspan y="32.8" x="6.4">微营销，将加好友，添加通讯录好友等功能封装到ActionUI中，然后统一调用ActionUI的方法实现相应功能</tspan><tspan y="65.6" x="6.4">优点：</tspan><tspan y="82.4" x="6.4">1.降低了客户类与子系统类的耦合度，实现了</tspan><tspan class="st2">子系统与客户之间的松耦合关系</tspan><tspan y="99.2" x="6.4">2.外观模式对客户屏蔽了子系统组件，从而</tspan><tspan class="st2">简化了接口，减少了客户处理的对象数目并使子系统的使用更加简</tspan><tspan y="116" class="st2" x="6.4">单。</tspan><tspan y="132.8" x="6.4">3.</tspan><tspan class="st2">降低原有系统的复杂度和系统中的编译依赖性</tspan><tspan>，并简化了系统在不同平台之间的移植过程</tspan><tspan y="165.6" x="6.4">缺点：</tspan><tspan y="182.4" x="6.4">在不引入抽象外观类的情况下，增加</tspan><tspan class="st2">新的子系统可能需要修改外观类或客户端的源代码</tspan><tspan>，违背了“开闭原则”</tspan><tspan y="199.2" class="st2" x="6.4">不能很好地限制客户使用子系统类</tspan><tspan>，如果</tspan><tspan class="st2">对客户访问子系统类做太多的限制则减少了可变性和灵活性</tspan><tspan>。</tspan><tspan y="232" x="6.4">使用场景：</tspan><tspan y="248.8" x="6.4">例如：一键打开/关闭，电，灯，打开电视</tspan></text></g><g transform="translate(360.5,436.5)" id="table3"><g><path fill="#e8eff8" d="M0,0L223,0L223,73.4L0,73.4L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="26.7" x="89.8">Facade</tspan><tspan y="41.9" x="13">(外观角色：拥有一个或多个子系</tspan><tspan y="57.1" x="13">统，客户端触发相应子系统功能)</tspan></text></g><g><path fill="#ffffff" d="M0,73.4L223,73.4L223,147L0,147L0,73.4z" stroke="#7e7e7e"/><text class="st3"><tspan y="90.8" class="st4" x="11.4">+Process():void</tspan><tspan y="104.4" class="st4" x="11.4">+step1():void</tspan><tspan y="118" class="st4" x="11.4">+step2():void</tspan><tspan y="131.6" class="st4" x="11.4">+step3():void</tspan></text></g></g><g transform="translate(80,226.57)" id="table4"><g><path fill="#e8eff8" d="M0,0L208,0L208,58L0,58L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="19" x="78.6">SystemA</tspan><tspan y="34.2" x="15.4">（子系统，可以被客户端直接</tspan><tspan y="49.4" x="36.2">调用，实现某个功能）</tspan></text></g><g><path fill="#ffffff" d="M0,58L208,58L208,97.6L0,97.6L0,58z" stroke="#7e7e7e"/><text class="st5"/></g></g><g transform="translate(364.5,226.57)" id="table5"><g><path fill="#e8eff8" d="M0,0L208,0L208,58L0,58L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="19" x="78.6">SystemB</tspan><tspan y="34.2" x="15.4">（子系统，可以被客户端直接</tspan><tspan y="49.4" x="36.2">调用，实现某个功能）</tspan></text></g><g><path fill="#ffffff" d="M0,58L208,58L208,97.6L0,97.6L0,58z" stroke="#7e7e7e"/><text class="st5"/></g></g><g transform="translate(645.75,226.57)" id="table6"><g><path fill="#e8eff8" d="M0,0L208,0L208,58L0,58L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="19" x="78.6">SystemC</tspan><tspan y="34.2" x="15.4">（子系统，可以被客户端直接</tspan><tspan y="49.4" x="36.2">调用，实现某个功能）</tspan></text></g><g><path fill="#ffffff" d="M0,58L208,58L208,97.6L0,97.6L0,58z" stroke="#7e7e7e"/><text class="st5"/></g></g><g transform="translate(472,436.5)" id="shape7"><path fill="none" d="M-10,-4L-288,-115.1" stroke="#3498db"/><path stroke-linecap="round" fill="#3498db" d="M0,0L-5.4,-6L-10,-4L-8,.7L0,0" stroke-width="1" stroke="#3498db"/><rect width="73.6" fill="#ffffff" y="-65.1" height="15.2" x="-177.5"/><text class="st3"><tspan y="-52.3" x="-177.6">contains-a</tspan></text></g><g transform="translate(472,436.5)" id="shape8"><path fill="none" d="M-0.4,-12.5L-3.5,-115.1" stroke="#3498db"/><path stroke-linecap="round" fill="#3498db" d="M0,0L3.4,-6.3L-0.4,-12.5L-3.8,-6.1L0,0" stroke-width="1" stroke="#3498db"/><rect width="73.6" fill="#ffffff" y="-65.1" height="15.2" x="-35.2"/><text class="st3"><tspan y="-52.3" x="-35.4">contains-a</tspan></text></g><g transform="translate(472,436.5)" id="shape9"><path fill="none" d="M11.5,-4.8L277.8,-115.1" stroke="#3498db"/><path stroke-linecap="round" fill="#3498db" d="M0,0L7.1,.9L11.5,-4.8L4.4,-5.7L0,0" stroke-width="1" stroke="#3498db"/><rect width="66.2" fill="#ffffff" y="-65.1" height="15.2" x="109"/><text class="st3"><tspan y="-52.3" x="108.9">contain-a</tspan></text></g><g transform="translate(67,463.2)" id="table10"><g><path fill="#e8eff8" d="M0,0L208,0L208,58L0,58L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="19" x="78.6">SystemA</tspan><tspan y="34.2" x="15.4">（子系统，可以被客户端直接</tspan><tspan y="49.4" x="36.2">调用，实现某个功能）</tspan></text></g><g><path fill="#ffffff" d="M0,58L208,58L208,97.6L0,97.6L0,58z" stroke="#7e7e7e"/><text class="st5"/></g></g><g transform="translate(275,510.64)" id="shape11"><path fill="none" d="M0,0L53.5,0L85.5,-0.6" stroke="#3498db" stroke-dasharray="11,5"/><path stroke-linecap="round" fill="none" d="M80.4,-5.5L85.5,-0.6L80.6,4.5" stroke-width="1" stroke="#3498db" stroke-linejoin="round"/></g><g transform="translate(935,389.5)" id="shape12"><path fill="#ffffff" d="M671,61L671,0L0,0L0,61L671,61z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.4">与适配器设计模式对比（对象适配器）</tspan><tspan y="32.8" class="st2" x="6.4">适配器模式是将一个对象包装起来以改变其接口</tspan><tspan>，而</tspan><tspan class="st2">外观是将一群对象 ”包装“起来以简化其接口</tspan><tspan>。</tspan><tspan class="st2">它们的意图</tspan><tspan y="49.6" class="st2" x="6.4">是不一样的</tspan><tspan>，</tspan><tspan class="st2">适配器是将接口转换为不同接口，而外观模式是提供一个统一的接口来简化接口。</tspan></text></g><g transform="translate(266.63,132)" id="shape13"><path fill="#ffffff" d="M374.8,24L374.8,0L0,0L0,24L374.8,24z" stroke="#ffffff"/><text class="st1"><tspan y="16.4" x="17.2">不同的功能分开放入不同的类中，最后由外观类统一调用</tspan></text></g></svg></div>
+        <div id="copyright">Powered by <a href="https://www.edrawsoft.com/" target="_blank" title="edrawsoft">Edraw Max</a></div>
+      </div>
+      <div id="navBar">
+        <div id="nav-thumbs">
+          <div class="nav-thumb">
+            <div>
+              <span class="number">
+                <span class="pagenum">1</span>
+              </span>
+              <a href="#page1">
+                <img src="data:image/png;base64,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/wDCu9M1XRfhn8afjN8NvD+pT3V0PDmm3vw/8Z2UepXWlw6e+rjWvi14F+J/jwXO+GG4FqvjhNMjmtozbafapLcpP+WWrab+0F4p/aC/4VF4p/Ze8C+MPg7afFLTfC198XPHH7NMviO48UWOpt4+1LVviRr+p3RtvDN/bg+DvAttqWqaZp+m21zqHiCO+m1uOebS4Lb9/qKutnmb13TlPHVVOnKMvbUqeGw2Jm4KnBOti8HhcHi6840qbhTniMTiJ0nN1abjWjCpGcPkmU4SniqeGwFGKxUPZuFeWJx2FowlUq1aqw+X4/GY3LqDqzqU+Z0cHRShR9koeyq1aZ85Wf7NXwD0e60vWtK+Hvw/stc8ORQNoGp6f4N8D2d/o8thDKll/Y91baAt5pgthLLHapZXETW8c0kcTgOxb6Noorhr4rFYpxeJxFfEOCkoe3rVa3IpS55KHtalTkUpPmajypy95pv3n20MNh8NFxw9CjQT5eZUaVKlzcqai5+ypUudrmlrJN3nN6OcuYooorA3CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD//2Q=="/>
+              </a>
+            </div>
+            <p>页-1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        const svgs=document.getElementById("svg-container").children;
+        const UA=window.navigator.userAgent;
+        const ua=(UA.indexOf('rv:11')+UA.indexOf('Firefox'))>=0;
+        const svgcount=document.getElementById('svg-container').childElementCount;
+        var styleArr=[];
+        var heightArr=[];
+        var navBar=document.getElementById('navBar');
+        var conInfo=document.getElementById('content-info');
+        for(var i=0;i<svgcount;i++){
+            styleArr[i] = {width:svgs[i].getAttribute('width'),height:svgs[i].getAttribute('height')}
+        }
+        window.onresize=function () {
+            renavstyle();
+            resvgstyle();
+        };
+        window.onscroll=renavstyle;
+        window.onload=function () {
+            renavstyle();
+            var sideWidth=navBar.offsetWidth;
+            document.getElementById('content-info').style.marginRight=sideWidth+'px';
+            document.getElementById('main-content').style.marginRight=sideWidth+'px';
+            resvgstyle();
+            doscroll();
+        };
+        function recontainstyle() {
+            var topHeight=conInfo.clientHeight;
+            var svgHeight=0;
+            for(var i=0;i<svgcount;i++){
+                heightArr[i]=svgs[i].getBoundingClientRect().height+10;
+                svgHeight+=svgs[i].clientHeight ||svgs[i].getBoundingClientRect().height;
+            }
+            var fullHeight=svgHeight+Number(topHeight);
+            if(fullHeight<window.innerHeight){
+            document.getElementById('copyright').style.position='absolute';
+            document.getElementById('copyright').style.transform ='translateX(-50%)';
+            document.getElementById('main-content').style.position='absolute';
+            document.getElementById('main-content').style.top=topHeight+'px';
+        }else{
+            document.getElementById('copyright').style.position='';
+            document.getElementById('copyright').style.transform ='';
+            document.getElementById('main-content').style.position='';
+        }
+        }
+        function resvgstyle() {
+            var sideWidth=navBar.offsetWidth+20;
+            for(var i=0;i<svgcount;i++){
+                var oriWidth = styleArr[i].width;
+                var oriHeight = styleArr[i].height;
+                var percent = oriHeight / oriWidth;
+                var innerWidth=document.body.offsetWidth-sideWidth;
+                if (innerWidth <= oriWidth) {
+                    svgs[i].removeAttribute('width');
+                    svgs[i].removeAttribute('height');
+                    if (ua) {
+                        svgs[i].setAttribute('height',innerWidth*percent);
+                    }
+                }else {
+                    svgs[i].setAttribute('width', oriWidth);
+                    svgs[i].setAttribute('height', oriHeight);
+                }
+            }
+            recontainstyle();
+        }
+        function renavstyle() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            if(scrollTop>topHeight){
+                document.getElementById('navBar').style.top=0+'px';
+            }else{
+                document.getElementById('navBar').style.top=topHeight-scrollTop+'px';
+            }
+            doscroll();
+        }
+        function doscroll() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            for(var i=0;i<svgcount;i++){
+                var sum=0;
+                for(var j=0;j<=i;j++){
+                    sum+=heightArr[j];
+                }
+                if(scrollTop+window.innerHeight/2-topHeight-sum<0){
+                    var sub=Number(i)+1;
+                    if(document.querySelector('#nav-thumbs .selected')){
+                        document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                    }
+                    document.querySelector('.nav-thumb:nth-of-type('+sub+')').classList.add('selected');
+                    break;
+                }
+            }
+        }
+        var navs=document.querySelectorAll('.nav-thumb');
+        for(i=0;i<navs.length;i++){
+            navs[i].children[0].onclick=function () {
+                document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                this.parentNode.classList.add('selected');
+            }
+        }
+</script>
+  </body>
+</html>

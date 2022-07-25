@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- saved from url=(0016)http://localhost -->
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>组合设计模式</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #content-info{
+            width: auto;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #author-info{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        #title{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding-top: 10px;
+            margin-bottom: 2px;
+            font-size: 34px;
+            color: #505050;
+        }
+        .text{
+            white-space:nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 2px;
+            font-size: 20px;
+            color: #8c8c8c;
+        }
+        #navBar{
+            position: fixed;
+            right:0;
+            bottom: 0;
+            background-color: #f0f3f4;
+            overflow-y: auto;
+            text-align: center;
+        }
+        #svg-container{
+            width: 100%;
+            min-width: 0;
+            margin: 0 10px;
+        }
+        #nav-thumbs{
+            padding: 0 5px;
+        }
+        .nav-thumb{
+            position: relative;
+            margin: 10px auto;
+        }
+        .nav-thumb >p{
+            text-align: center;
+            font-size: 12px;
+            margin: 4px 0 0 0;
+        }
+        .nav-thumb >div{
+            position: relative;
+            display: inline-block;
+            border: 1px solid #c6cfd5;
+        }
+        .nav-thumb img{
+            display: block;
+        }
+        .nav-thumb span{
+            pointer-events: none;
+        }
+        #main-content{
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #d0cfd8;
+            display: flex;
+            height: auto;
+            flex-flow: row wrap;
+            text-align:center;
+        }
+        #svg-container >svg{
+            display: block;
+            margin:10px auto;
+            margin-bottom: 0;
+        }
+        #copyright{
+            bottom: 0;
+            left: 50%;
+            margin: 5px auto;
+            font-size: 16px;
+            color: #515151;
+        }
+        #copyright >a{
+            text-decoration: none;
+            color: #77C;
+        }
+        .number{
+            position: absolute;
+            top:0;
+            left:0;
+            border-top:22px solid #76838f;
+            border-right: 22px solid transparent;
+        }
+        .pagenum{
+            font-size: 12px;
+            color: #fff;
+            position: absolute;
+            top: -23px;
+            left: 2px;
+        }
+        #navBar::-webkit-scrollbar{
+            width: 8px;
+            background-color: #f5f5f5;
+        }
+        #navBar::-webkit-scrollbar-track{
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        #navBar::-webkit-scrollbar-thumb{
+            border-radius: 8px;
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            background-color: #6b6b70;
+        }
+        #navBar::-webkit-scrollbar-thumb:hover{
+            background-color: #4a4a4f;
+        }
+        .nav-thumb >div:hover{
+            box-shadow:1px 1px 4px rgba(0,0,0,.4);
+        }
+        .selected .number{
+            border-color: #08a1ef transparent;
+        }
+</style>
+  </head>
+  <body>
+    <div id="main-area">
+      <div id="content-info">
+        <div id="title">组合设计模式</div>
+        <div id="author-info">
+          <div class="text" id="author-name">Administrator</div>
+          <div class="text" id="share-time">2019-09-01</div>
+        </div>
+      </div>
+      <div id="main-content">
+        <div id="svg-container"><svg width="2245" xmlns:xlink="http://www.w3.org/1999/xlink" height="793" xmlns:ev="http://www.w3.org/2001/xml-events" viewBox="0 0 2245 794" id="page1" preserveAspectRadio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg"><style type="text/css"><![CDATA[
+.st1 {fill:#000000;font-family:Arial;font-size:10pt}
+.st3 {fill:#1f6391;font-family:宋体;font-size:10pt}
+.st4 {fill:#236ea1;font-family:宋体;font-size:10pt}
+.st2 {fill:#ff0000}
+.st5 {font-family:SimSun;font-size:9pt}
+]]></style><defs/><rect width="2245" fill="#ffffff" y="0" height="794" x="0" stroke="#808080"/><g transform="translate(315.25,99)" id="shape1"><path fill="#ffffff" d="M246.5,24L246.5,0L0,0L0,24L246.5,24z" stroke="#ffffff"/><text class="st1"><tspan y="16.4" x="25.9">组合设计模式（整体-部分模式）</tspan></text></g><g transform="translate(746,193.5)" id="shape2"><path fill="#ffffff" d="M635.5,406.5L635.5,0L0,0L0,406.5L635.5,406.5z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.7">使用场景：</tspan><tspan y="32.8" x="6.7">文件的操作：复制，删除，粘贴</tspan><tspan y="49.6" x="6.7">xml操作：xml解析为实体类，实体类转</tspan><tspan y="82.4" x="6.7">1.优点</tspan><tspan y="99.2" x="6.7">   （1）可以清楚地定义分层次的复杂对象，表示对象的全部或部分层次，使得增加新构件也更容易。</tspan><tspan y="116" x="6.7">   （2）客户端调用简单，客户端可以一致的使用组合结构或其中单个对象。</tspan><tspan y="132.8" x="6.7">   （3）定义了包含叶</tspan><tspan class="st2">子对象和容器对象的类层次结构</tspan><tspan>，叶子对象可以被组合成更复杂的容器对象，而这</tspan><tspan y="149.6" x="6.7">个容器对象又可以被组合，这样不断</tspan><tspan class="st2">递归下去，可以形成复杂的树形结构</tspan><tspan>。</tspan><tspan y="166.4" x="6.7">    （4）更容易在组合体内加入对象构件，客户端不必因为加入了新的对象构件而更改原有代码。</tspan><tspan y="183.2" x="6.7">2.缺点</tspan><tspan y="200" x="6.7">      (1) 使设计变得更加抽象，</tspan><tspan class="st2">对象的业务规则如果很复杂，则实现组合模式具有很大挑战性</tspan><tspan>，</tspan><tspan class="st2">而且不是</tspan><tspan y="216.8" class="st2" x="6.7">所有的方法都与叶子对象子类都有关联</tspan><tspan>。</tspan><tspan y="233.6" x="6.7">      (2) 增加新构件时可能会产生一些问题，很难对容器中的构件类型进行限制。</tspan><tspan y="282.4" x="6.7">3.模式适用环境</tspan><tspan y="299.2" x="6.7">在以下情况下可以使用组合模式：</tspan><tspan y="316" x="6.7">    (1) 需要表示一个对象整体或部分层次，在具有整体和部分的层次结构中，希望通过一种方式忽略整体</tspan><tspan y="332.8" x="6.7">与部分的差异，可以一致地对待它们。</tspan><tspan y="349.6" x="6.7">    (2)让客户能够忽略不同对象层次的变化，客户端可以针对抽象构件编程，无须关心对象层次结构的细</tspan><tspan y="366.4" x="6.7">节。</tspan><tspan y="383.2" x="6.7">     (3)对象的结构是动态的并且复杂程度不一样，但客户需要一致地处理它们。</tspan></text></g><g transform="translate(239.5,458.57)" id="table3"><g><path fill="#e8eff8" d="M0,0L163,0L163,27.6L0,27.6L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="19" x="33">Leaf(叶子节点)</tspan></text></g><g><path fill="#ffffff" d="M0,27.6L163,27.6L163,53.6L0,53.6L0,27.6z" stroke="#7e7e7e"/><text class="st4"/></g></g><g transform="translate(327,193.5)" id="table4"><g><path fill="#e8eff8" d="M0,0L254,0L254,65L0,65L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="30.1" x="109">Class</tspan><tspan y="45.3" x="94.6">Component</tspan></text></g><g><path fill="#ffffff" d="M0,65L254,65L254,131.8L0,131.8L0,65z" stroke="#7e7e7e"/><text class="st3"><tspan y="82.4" class="st5" x="11.4">+Operator():void</tspan><tspan y="96" class="st5" x="11.4">+Add(Paramter:Componet):void</tspan><tspan y="109.6" class="st5" x="11.4">+Remove(Parameter:Componet):void</tspan><tspan y="123.2" class="st5" x="11.4">+GetChild(int):Componet</tspan></text></g></g><path fill="none" d="M0,0L0,-74.6L133,-74.6" transform="translate(321,458.57)" stroke="#118972" id="shape5"/><g transform="translate(600.5,458.57)" id="shape6"><path fill="none" d="M0,0L0,-74.6L-146.5,-74.6L-146.5,-126.4" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M-146.5,-133.3L-150.5,-126.4L-142.5,-126.4L-146.5,-133.3" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(519,458.57)" id="table7"><g><path fill="#e8eff8" d="M0,0L163,0L163,27.6L0,27.6L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="19" x="21.8">Composite（集合）</tspan></text></g><g><path fill="#ffffff" d="M0,27.6L163,27.6L163,53.6L0,53.6L0,27.6z" stroke="#7e7e7e"/><text class="st4"/></g></g><g transform="translate(641.25,458.57)" id="shape8"><path fill="none" d="M0,-12.5L0,-199.2L-60.3,-199.2" stroke="#2da2bf"/><path stroke-linecap="round" fill="none" d="M0,0L3.6,-6.2L0,-12.5L-3.6,-6.2L0,0" stroke-width="1" stroke="#2da2bf" stroke-linejoin="round"/><path stroke-linecap="round" fill="none" d="M-52.3,-195.2L-60.3,-199.2L-52.3,-203.2" stroke-width="1" stroke="#2da2bf" stroke-linejoin="round"/></g><g transform="translate(64.5,232.57)" id="table9"><g><path fill="#e8eff8" d="M0,0L163,0L163,27.6L0,27.6L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="19" x="60.2">Client</tspan></text></g><g><path fill="#ffffff" d="M0,27.6L163,27.6L163,53.6L0,53.6L0,27.6z" stroke="#7e7e7e"/><text class="st4"/></g></g><g transform="translate(217,515.5)" id="shape10"><path fill="#ffffff" d="M511.5,226.5L511.5,0L0,0L0,226.5L511.5,226.5z" stroke="#ffffff"/><text class="st1"><tspan y="32" class="st2" x="6.7">组合模式包含如下角色</tspan><tspan>：</tspan><tspan y="48.8" x="6.7">Component: 抽象构件</tspan><tspan y="65.6" x="6.7">Leaf: 叶子构件</tspan><tspan y="82.4" x="6.7">Composite: 容器构件</tspan><tspan y="99.2" x="6.7">Client: 客户类</tspan><tspan y="132" class="st2" x="6.7">模式分析</tspan><tspan y="148.8" x="6.7">组合模式的关键是定义了一个</tspan><tspan class="st2">抽象构件类，它既可以代表叶子，又可以代表容器，</tspan><tspan y="165.6" x="6.7">而客户端针对该抽象构件类进行编程，</tspan><tspan class="st2">无须知道它到底表示的是叶子还是容器</tspan><tspan>，</tspan><tspan class="st2">可</tspan><tspan y="182.4" class="st2" x="6.7">以对其进行统一处理。</tspan><tspan y="199.2" x="6.7">同时容器对象与抽象构件类之间还建立一个聚合关联关系，</tspan><tspan class="st2">在容器对象中既可以包</tspan><tspan y="216" class="st2" x="6.7">含叶子，也可以包含容器，以此实现递归组合</tspan><tspan>，形成一个树形结构。</tspan></text></g><g transform="matrix(1,-0,0,1,227.5,259.4)" id="shape11"><path fill="none" d="M0,0L99.5,0" stroke="#2da2bf" stroke-dasharray="11,5"/><path stroke-linecap="round" fill="none" d="M94.5,-5L99.5,0L94.5,5" stroke-width="1" stroke="#2da2bf" stroke-linejoin="round"/></g></svg></div>
+        <div id="copyright">Powered by <a href="https://www.edrawsoft.com/" target="_blank" title="edrawsoft">Edraw Max</a></div>
+      </div>
+      <div id="navBar">
+        <div id="nav-thumbs">
+          <div class="nav-thumb">
+            <div>
+              <span class="number">
+                <span class="pagenum">1</span>
+              </span>
+              <a href="#page1">
+                <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEAeAB4AAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAA1AJYDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD+/iiiq9reWl9At1Y3VveWztIqXFrPFcQO0MrwTKs0LPGzRTRyQyAMTHLG8bAOrAHn079PvAg1XVNP0PTNR1rVruKw0vSbG71PUr2ckQ2dhYwSXV3cylQzCOCCKSV9qs21TgE4B+LtW/4KTfsLaGW/tP8AaW+HcEcemQazLcRzavd2cOm3U2n29vdT3tnpVxaQLLPqdtEscsyTeYl+pjB0rVPsf2nqN/DplnNe3CyNDD5YZYlVpCZZUhQKGZFPzyLnLAAZPbFeM/EP9or4YfCrTLTWfHeqXehabe3iWMFxLaLOXnfHyx29rPNdXLICJJIbSC4uVt1nu/INpaXk9vpRw2LxFWMMPSdZVJU6VOnTpTnVnWlKXuR5Z2nKceWNOnGDldSleWijE6+HoWniKkKcI3nUc6kKUfZrdupNctNRtJucnyKy5uWKlIvfCL9oT4M/HlfET/CHx5pfjmPwnc2dj4kk0q31SKLSNQvo55YdMu5dQsLONdUiit2kvtMRnv8ATI5rN9St7Rb+xNx7LXB6d8RvDmr2llf6XLNqGn6jBBdWGoWT2N3Y3lrdIslvdWt1bX0sNxbTRussU8DyRyxsrxsykE95VVqNSjNxqUatF3kuSqmppxlKMk04walHSMk4RanGaaV+WKp1IVU5QqU6kW04ypy5o8sknH3ryUr+81KLtKPK1rzNlFfn98fP+Cln7NP7M/x+8Efs7fF6T4g+HPFnxAm8PQaD4pPg2WX4dbvEU728Ml34qe/hCQaWyxvrlxbWF3DpccytM58m7FtsaJ/wU1/YB8RxalNon7WfwZv4tHg0u61V08URRDTbXWdUl0Wxur0TwxG2tf7Ut57K9uZgkGlzQzf2pJZpG7LzwlGpCFSEoyhUlXhTkmmpzw1RUa8Yq6bdGq1Tn7qtNqKcm0nvKnUg3GdOpFpUW+aEoq2Ii50PecVF+2hGU6aU3KUU5KPKm1900VkaD4g0HxTpNlr/AIY1vSPEehalG8una1oOpWer6TfxRzSW8kllqWnzXFndRxzwywu8E0irNFJGxDoyjXqt9ejs0+jTSaa7pppp7NNNNppvNNSScWpJq6aaaaezTTaafRptPo2FFFFAwooooAKKKKACiiigAooooAw9a0Cx15beO/jE0duZWSNpLyNS8gRd5+x3doxKqpUB2dcO2FB5rhLX4LfD3T01caT4a0vRJddB/ta70L+1dFv72XyZII7qa/0zV7W8a9t45HFreed9ptWO+CWNgCPV6K0hWrU01Tq1KaejUJzimlJTSajJKS54xlaSlHmipct0ms50aNT+JSpzdmrzhGTs4uLSbXMrxlKLcZRdpNXVz5A+K37NVkvw88X3nwz1v4zXfxK0zQNX1P4eW2v/ALSHx58S6LN43s9OupPC6apo/jX4m614au7L+2fshuBqdi8EcYaRpIlVnH4yaHqH/Baj4PaVZ+Nfi54U+HnjIP4q8L+FLDTdd8UeA5rPWNR+KviP4c+BPBvhjXtF8Fa18NdOOpW/jzX/AOx9N8YeG/EfhSHR7S+1O61rwz8RPtGliz/Xf9rH496N4N1D4O+D9F+O1z8LT4i+Kd3Y/FTxF8PtP8EeNfHfhD4dWXwV+Mvi+y1FtC8U+B/ilpei2GrfEDwp4I0afV9U8E3Zksry+tNPntJpZL60s337OmqfGDwvo/2z9tn9o7xh4Wl1j4f/ABC0c2mjfshW0J1nwZ4o8P8AxK+H2uCbSf2VNPvc6V4p8O+HvEMFhdSfYNRNguna3YahpNzf6bc9lX+0azpY3F47MPYSdCnDnVV0F7CvLFOEOTC0qXNildVlJz9vhtuZU4On8e8TRy6ec5Pwxwvhq+Noxw1StUjj8pwVCeJxOBpyw8p08bmtbMJ0cNh6s4yq0YU6UcY6VLlc4ymdB8FfB/xp1bwJqNj+0roXgPTPEmp6NAts/wAIfGHxPivrWXVbO7bVtP1C+mtdCbSNT0SS4ttP0zW/CuszNLLbSanb3VnOLeY7Pwi8Mw/Dz41fFH4caJr/AI61TwlpHwd+APiTTdP8b/EPxz8RJbDXNe8WftDaFrd9p19478QeIbzSo9T0zwX4ZguNL0mex0ZG0qGa206CWSd5eQ8XeCtX8AJayeOf+Chvx38IR3wl+wv4k079iLRkvZIV3tbWbX/7J0C3d46h2t7G3Ml5dLFObaCUW85j8/8A2LvjJH8Y/EI8X694l0zV/iFqf7IH7F9v8TIoYrbSrmz+Ksq/HjxR460a40WOG0TTtQ0+88WWU97plpaxwaa1/HZLHE8EkEPoYX63VwOcT5qtTBzwVeryqlXlh416eNyxQlCpWoTXPQhXlRUoYiNSCmo1Y81VufBjcbSnxBwxRxWUV8szSOZ0nRxNbH5ViZVcBUwme4fF4NvKcfy01WxMMJinhsVhaka6putQklh2qX5//wDBU34u/s9/CT42+FPEpbw74v8AjJoMcmpeLvB3iL4OfBrx3ofh2xvdI8Hjwz4l1rXfiZo+jLpVxbWui2esWGoJ4uuJdNfSbW8vb3Q9K0y2trn8ZPh7/wAFBtC0zwJpfjpPhz+z34W8N6zZeKfCVh4o8P8A7EX7IlloPjvQ49Si0o6VPbeGfiLrc2neRqLS23/CMyahFok7SW17NqGt6fia5/ff/gpr4c+IGleKNI+Ivw68Efs1eMtXkt7nwhrlp8bfit4Us7f/AIQ7W4fCA1uG/wDh58c/iB4T+CU63Q0+GeeCTw/r2o3Gl6Vb6tDe2+ux6VZ3XxJ8Jv2bf+CkTa7c3F7+w/8AsM6n8N9Z0DS73wpcXvwi/YysdH0aGfSg2jjw3qfw31fVLvVtNSC30+e+XUNHuLOeSSzsPDerjSVbXLb4GtjMQvrMMNRzWFWP1mEPZ5VHH0JySxtWpFRxWZUcJy4uFSlSpyqODpYiVReyccLFL+isoyDK8TjclxeccQcEV8sq4TCVcZlWbcb43KMTD3aODjVxbyrhXOMRh3gZU6csRh3hca3g8NgsLKWKlGOGn5b4a/4KY/GD4O+HvBPg74b674W8A/CLUbLToPAUnhn9nP4C/DbwYupaxHeanr9p4N8BW/xN0DSdU0/SfEWstb+IpbHW/DsVpe2EuqXFzPbXl/ezwfB3/gsV+1ZrUNzaeNvFvjvxF4tiu/Fko8LeAfgH8AvFN1P4ZMUujeH9b0i38F/GDxFd6tcaO63fjS9W3eXQ7wWFpoKazeSX8NlefbOp/Az9tPUfCSsP2EvgU/iXw7qPxJ0zwTb3fwf/AGHIB4Z0d9It5dL1Xw1bzfFDxLpmnW/xGvk/sS7sZNTt7mGCx0678T2ltA1wkZ8Qvgn+2Jqek3HiTwt/wTs+BU3i/UPDGkaJ/Y2r/DX9ha9u9Ka/fSrjxDLBrmofEFoZbqy1O61jXYLO7vdW8NSalpGnI2k6rHfzzpw4TG8TUp1KuNji80hiKcaVOKybLMLWl9YjiK3O51eJYuhVg8RSwcq+Ip0Z4OlQp1KMsRUoxqYf6ziDIvCCtRlQ4czjJOHMRh54ql9anx5x3xbgJYmhGlTo4nEU8x8EMDjcZg54r2uI5cuuszVDEVpxwsMXh/7V8y0X/goV8Z9U8ESaVb/tmfFzVvGWpXGjeFYta0//AIJg6DB4k8L6jf6tZpL4l1bwnJ8ernSIZLeyk06HV4LyJ7XQY/EC3t/oEMl7pdtpf7z/AAc+J+qeLrLS/DWv+FvipbeI9F0CaDxB408a/Cu9+GuheKNa8N3tn4d1XWNM0641DUYdMXxXqH2nxH4f0SG7vAugM8yXTwQxSTfH3hT9gWyOh6Nqlx4e/Zj8J67q2kTXvijTbr9iH4ByaxDr2sppN3eG9u/DOv3WhtqVveWBl1g2eoeIdM1LVliuLbUZ7Gxsg/258O/CXxX8OanrE/j/AOLWm/EPR7u2tY9E0my+G2meCJdCuIndrmVtQ07X9UOp286MsNvazWkD2scaFrm5k8yR/foY/EVKio1snx1CVebq18TUqZd9Wo1Y4Z+7CNLH18RTp+1qTpxp4elOjWlCnUrKnNc8PzfMuHMqwmFr4jCcdcLZm8FCqsNgsJQ4pjmOYQePUFGDxnCWXYF1vYQjOE8VjKKjhYTqU6rr4iWHl61RRRXafKBRRRQAUUUUAFFFFABWB4q1W60Pwx4i1qxTTZL3SdD1XUrSPWdSh0bSHubKxnuYF1XV7j9xpenGWNRe6hN+7s7bzbh/ljNb9edfGCeO1+EvxQupZtHt4rX4eeM7qS48Q297d6Dbpb+HNSmafW7TTWTULrSIVQy6jbWLpeXFmk0Ns6TOjDhzSdenlmZVMM3HEU8vx1TDyjKMGq1PB4mdJqc4VIQaqQi1OdOcINKc4ShCaOnB0pVsZhKMYxnKti8LRjCcJ1ITlWxOHpRhOnTvUqQlKrGM6dNOpOEpQpp1JwT/ABM0b/gpb8VPEuo+EdJ0T9lz4BDXfiTb2a/DjRvEfx7+B+kWHjX7WbaSw8SeF/iKnj/VfB/jbRfEavd22k6P4WuNT8YrdwxTNpWoW8szW/7o+ELSSHQNIvL7w1pvhPXdS0jSbvxDoWmPZz22maxJZRy3+mrfWMcdtqK6beTXNnHfxLsuo4lmQ+W6Afxdfs5/E/4Y+HPip4Q07wh+yd+xb8Srnwppfh7xxLd/8IJ+0x4t1vw9peg6lLpl54wFpeeEtW8LDX7fUNc1C80LxF4ztLjxTAl7pd3FrviOe7h1OT94vhf/AMFK/HPxP1HXodG8BaENL8M/EC18ETNq3g74veHPGPimK4jvb2XxB4V+Hs2iavrVz4btdLiju4vENtd6xZ3sFpeXNxBpDzJZW3K8dhMtwNfFfW89zSm5xq1FUjUzKvhsNTioxqfVsLHnoqVSrL617N4unTlGhCEYexxCo/fZjkmYcRcVrhXB5NwXw9jqVJVcFUoYXE8HYbN/aYfFV6GHp1OI8VicTPG1sJQ9rSweMWAr4qvSxGKp1o0pQoH67XuiaNqUy3Go6TpuoTrGsKS3tjbXbpErO6xo1xHIUUPI7ELgEsSc8Yhh8N+HbaaO4ttB0e2uIXWSGe20yzt54nQgq0c0MKSIcjB2sMqSrZUkH8lfCv8AwUj8ZeIPD2l+IDoHgy8t5LXV7jW4/D/hT4i3lxpVti0l0LWXt9VvNHW00VUudmrz65daO7wbtV05pLeCW1a/4h/b3+OUukW2p+CvAXw+eW/1TTdHsrLxboHxSsbieS8ttSuZtas49NhuZNU8ORRjSo2vbJftC3hnsre1v/t+nXA82PHGRODk8RjqMIxoymq+BxuHVOniFScKk41lStSXtoRnJQk4z54+ym6dRx+sX0cfE2rHE1cNg+GcfTwtXF0J18u4t4fzCjPGYOliq08DRxGDrYmlVx1Wng6ksNQ9rSdZVMNP29GjiKeIj8Df8Ft/gH+2T4j8Z23jr9n/AOEd18T/AA54js/DNvql54B+Fek/F/x5onhzwrrXgSLxP4ZvvCup+CtQF/Z/EE39xBJpH9p30M+l+HF1Y3Ok2mnay9l+XKfED/gux4T1Hw5pHwj+HX7e/wAO/hl4Yg8B+HpfCOq/Ce88X2F7p+nahYWlv4d8JaZa+BbKH4d+D7Twqtpa3N94d/d6KsEth9hsFhe00v8AuT8IahqureE/DGq67b21prep+HdF1DWLWyjuYrO21W9022udQt7SK9JvI7aG7kmjgjuyblIlRZyZQ9dDX01OgsLUfs5RcoYiVdte/Tq4mE4xVerdxWIjyUYwjCcIU5QUKjhGpKr7X8RxvPWm41abw9elQeDnypKVOpQnKCm4OVWEa1KVKNKpapUU1QcFOMeSUP5rj+1b/wAFbNc0Lwxr2nfC/wDaa8LXehW2vaf448O6l+xb8PNVn8SvdeKtJbw14p0lJ/iLo19A1touo3OmXXh3SnnngsrGTVb8Tz211etz3w7/AG6P+Cs7a3DeeJP2a/2uddtY9e8J2Wo+Dtc/Yq8GeErIWyarBpGsT2Hjez+JcST6DrTy/wBr6lqq2dzqnhzSj5VrpDQWt34gX+nKitG5XqWkoqrNzmowi3FN4e8KM5qc6EeSg4x5HKUJValSDTlOFTBe0UXF1Obmk237OnFpeyr0oqHKvccI4iU+a8/aVqWHrVKbnRSl+I7+L/8Agsavg/Up7LwUde1/xl4313UNHuYfBv7NvhOb4U+AdZ0yODw9pS6L4m/aFlfxhe+EpiNUebXm0rWde1hrjTtSttM0e1gN99vfsQXf7ZsngXxDYftn21tL4w02+0eHw54gXQPhp4ZvvEVo+mt/bl1eaL8LPiT8SPDlpDDqcafYd13pd28M7mSyKhVg+2qKKaVLnUVzKeHo4f8AeN1XGFBUVTnGU22sQ1Saq4m3tsT7WrLEyqzkpIlHmabck1WnWuna6m8Q3SajyxdJSxCcY8i5FRpU6ajSioRKKKKCgooooAKKKKACiiigAqnqGn2GrWF9pWqWdrqOmanZ3On6jp99BFdWV/YXsL215Z3ltMrw3FrdW8skFxBKjxTRO8cisjEEoqKlOFWnUpVYQqUqsJ0qtOpFTp1KdWE6dSnOEk4zhUp1KlOcJJxlCc4yTjKSdRlKEozhKUJwlGcJwk4yhOEoyhKMouMoyjKMZRlGUZRlGMoyjKMZL4l1b/gmh+wbres3viDUf2X/AIYy6tqB0/7VcwWGoWKFdKulvNPjgtLHUbaytIbadFKQWlvBC0e6CRHgd4mv+H/+Cc/7FXhPxEPFnhf4CeG/DniFdUudZTU9C1rxjpMqX95eQ3100cVh4kgto7ae5gQyaekK6e0LTWv2X7Lc3EMpRXA8myhz9q8swDqKq6/tPqtL2ntnKnN1vaK0/audGjP2jm581KnLmThFr6+HiJx9TorDQ414qjh1hfqKoLPcf7FYJtN4NUnKcPqraTdDl9lKSUpRlP3ziYP+CUP/AAT1tHsHsv2ZfCVi+nXV3extp/iDx7YG9udR16TxLqL639j8Ww/8JEupavK82pQ6/wD2lDqFqRpd5HNpSJZL9Y23wA+BFp9m+y/BX4TQGzaN7V4vh14QSS3kiDrHLDINH3xyoJJAsqsJB5kh3ZdslFdMsHg58rnhMJNwjCEHPC4ao4wpQp06cYuph6koxpwo0YQjGSUI0qUYpKnDk8LB57nmXU6tHLs7zrLqNerPEV6OXZxm2XUK+IqwVOpXr0MuzTL6FavUppUp161CrWlSSpSrOklSPWY40iRIokSOKNFjjjjUIkaIAqIiKAqoqgKqqAFAAAAFPoorpbbbbbbbbbbbbbd223dttttttttttttt+Y2222222222222222222222222222222yiiigQUUUUAFFFFABRRRQAUUUUAFFFFAH//2Q=="/>
+              </a>
+            </div>
+            <p>页-1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        const svgs=document.getElementById("svg-container").children;
+        const UA=window.navigator.userAgent;
+        const ua=(UA.indexOf('rv:11')+UA.indexOf('Firefox'))>=0;
+        const svgcount=document.getElementById('svg-container').childElementCount;
+        var styleArr=[];
+        var heightArr=[];
+        var navBar=document.getElementById('navBar');
+        var conInfo=document.getElementById('content-info');
+        for(var i=0;i<svgcount;i++){
+            styleArr[i] = {width:svgs[i].getAttribute('width'),height:svgs[i].getAttribute('height')}
+        }
+        window.onresize=function () {
+            renavstyle();
+            resvgstyle();
+        };
+        window.onscroll=renavstyle;
+        window.onload=function () {
+            renavstyle();
+            var sideWidth=navBar.offsetWidth;
+            document.getElementById('content-info').style.marginRight=sideWidth+'px';
+            document.getElementById('main-content').style.marginRight=sideWidth+'px';
+            resvgstyle();
+            doscroll();
+        };
+        function recontainstyle() {
+            var topHeight=conInfo.clientHeight;
+            var svgHeight=0;
+            for(var i=0;i<svgcount;i++){
+                heightArr[i]=svgs[i].getBoundingClientRect().height+10;
+                svgHeight+=svgs[i].clientHeight ||svgs[i].getBoundingClientRect().height;
+            }
+            var fullHeight=svgHeight+Number(topHeight);
+            if(fullHeight<window.innerHeight){
+            document.getElementById('copyright').style.position='absolute';
+            document.getElementById('copyright').style.transform ='translateX(-50%)';
+            document.getElementById('main-content').style.position='absolute';
+            document.getElementById('main-content').style.top=topHeight+'px';
+        }else{
+            document.getElementById('copyright').style.position='';
+            document.getElementById('copyright').style.transform ='';
+            document.getElementById('main-content').style.position='';
+        }
+        }
+        function resvgstyle() {
+            var sideWidth=navBar.offsetWidth+20;
+            for(var i=0;i<svgcount;i++){
+                var oriWidth = styleArr[i].width;
+                var oriHeight = styleArr[i].height;
+                var percent = oriHeight / oriWidth;
+                var innerWidth=document.body.offsetWidth-sideWidth;
+                if (innerWidth <= oriWidth) {
+                    svgs[i].removeAttribute('width');
+                    svgs[i].removeAttribute('height');
+                    if (ua) {
+                        svgs[i].setAttribute('height',innerWidth*percent);
+                    }
+                }else {
+                    svgs[i].setAttribute('width', oriWidth);
+                    svgs[i].setAttribute('height', oriHeight);
+                }
+            }
+            recontainstyle();
+        }
+        function renavstyle() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            if(scrollTop>topHeight){
+                document.getElementById('navBar').style.top=0+'px';
+            }else{
+                document.getElementById('navBar').style.top=topHeight-scrollTop+'px';
+            }
+            doscroll();
+        }
+        function doscroll() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            for(var i=0;i<svgcount;i++){
+                var sum=0;
+                for(var j=0;j<=i;j++){
+                    sum+=heightArr[j];
+                }
+                if(scrollTop+window.innerHeight/2-topHeight-sum<0){
+                    var sub=Number(i)+1;
+                    if(document.querySelector('#nav-thumbs .selected')){
+                        document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                    }
+                    document.querySelector('.nav-thumb:nth-of-type('+sub+')').classList.add('selected');
+                    break;
+                }
+            }
+        }
+        var navs=document.querySelectorAll('.nav-thumb');
+        for(i=0;i<navs.length;i++){
+            navs[i].children[0].onclick=function () {
+                document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                this.parentNode.classList.add('selected');
+            }
+        }
+</script>
+  </body>
+</html>

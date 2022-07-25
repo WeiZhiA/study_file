@@ -1,0 +1,6 @@
+
+
+select avg(score) from score group by c_id left right (select c.name from course c) on c.id = score.c_id
+
+
+select s.name from students from

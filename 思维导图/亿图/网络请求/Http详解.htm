@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- saved from url=(0016)http://localhost -->
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Http详解</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #content-info{
+            width: auto;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #author-info{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        #title{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding-top: 10px;
+            margin-bottom: 2px;
+            font-size: 34px;
+            color: #505050;
+        }
+        .text{
+            white-space:nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 2px;
+            font-size: 20px;
+            color: #8c8c8c;
+        }
+        #navBar{
+            position: fixed;
+            right:0;
+            bottom: 0;
+            background-color: #f0f3f4;
+            overflow-y: auto;
+            text-align: center;
+        }
+        #svg-container{
+            width: 100%;
+            min-width: 0;
+            margin: 0 10px;
+        }
+        #nav-thumbs{
+            padding: 0 5px;
+        }
+        .nav-thumb{
+            position: relative;
+            margin: 10px auto;
+        }
+        .nav-thumb >p{
+            text-align: center;
+            font-size: 12px;
+            margin: 4px 0 0 0;
+        }
+        .nav-thumb >div{
+            position: relative;
+            display: inline-block;
+            border: 1px solid #c6cfd5;
+        }
+        .nav-thumb img{
+            display: block;
+        }
+        .nav-thumb span{
+            pointer-events: none;
+        }
+        #main-content{
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #d0cfd8;
+            display: flex;
+            height: auto;
+            flex-flow: row wrap;
+            text-align:center;
+        }
+        #svg-container >svg{
+            display: block;
+            margin:10px auto;
+            margin-bottom: 0;
+        }
+        #copyright{
+            bottom: 0;
+            left: 50%;
+            margin: 5px auto;
+            font-size: 16px;
+            color: #515151;
+        }
+        #copyright >a{
+            text-decoration: none;
+            color: #77C;
+        }
+        .number{
+            position: absolute;
+            top:0;
+            left:0;
+            border-top:22px solid #76838f;
+            border-right: 22px solid transparent;
+        }
+        .pagenum{
+            font-size: 12px;
+            color: #fff;
+            position: absolute;
+            top: -23px;
+            left: 2px;
+        }
+        #navBar::-webkit-scrollbar{
+            width: 8px;
+            background-color: #f5f5f5;
+        }
+        #navBar::-webkit-scrollbar-track{
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        #navBar::-webkit-scrollbar-thumb{
+            border-radius: 8px;
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            background-color: #6b6b70;
+        }
+        #navBar::-webkit-scrollbar-thumb:hover{
+            background-color: #4a4a4f;
+        }
+        .nav-thumb >div:hover{
+            box-shadow:1px 1px 4px rgba(0,0,0,.4);
+        }
+        .selected .number{
+            border-color: #08a1ef transparent;
+        }
+</style>
+  </head>
+  <body>
+    <div id="main-area">
+      <div id="content-info">
+        <div id="title">Http详解</div>
+        <div id="author-info">
+          <div class="text" id="author-name">Administrator</div>
+          <div class="text" id="share-time">2019-09-01</div>
+        </div>
+      </div>
+      <div id="main-content">
+        <div id="svg-container"><svg width="3367" xmlns:xlink="http://www.w3.org/1999/xlink" height="793" xmlns:ev="http://www.w3.org/2001/xml-events" viewBox="0 0 3368 794" id="page1" preserveAspectRadio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg"><style type="text/css"><![CDATA[
+.st3 {fill:#000000;font-family:Arial;font-size:10pt}
+.st2 {fill:#000000;font-family:Arial;font-size:12pt}
+.st1 {fill:#000000;font-family:Arial;font-size:16pt}
+.st4 {fill:#000000;font-family:宋体;font-size:10pt}
+.st5 {fill:#1f6391;font-family:宋体;font-size:10pt}
+]]></style><defs/><rect width="3368" fill="#ffffff" y="0" height="794" x="0" stroke="#808080"/><g transform="translate(1698.92,47)" id="shape1"><path fill="#ffffff" d="M179.6,53.8L179.6,0L0,0L0,53.8L179.6,53.8z" stroke-width="1.33333" stroke="#002060"/><text class="st1"><tspan y="34.5" x="69.9">Http</tspan></text></g><g transform="translate(1130.76,399.5)" id="shape2"><path fill="#ffffff" d="M277.2,110.5L277.2,0L0,0L0,110.5L277.2,110.5z" stroke="#002060"/><text class="st2"><tspan y="20" x="6.5">Get请求</tspan><tspan y="60" x="6.5">1. 请求行 (请求方式  请求的文件 Http</tspan><tspan y="80.8" x="6.5">版本)</tspan><tspan y="101.6" x="6.5">2. HTTP头</tspan></text></g><g transform="translate(1641.52,380.5)" id="shape3"><path fill="#ffffff" d="M303,125.5L303,0L0,0L0,125.5L303,125.5z" stroke="#002060"/><text class="st2"><tspan y="20" x="6.4">Post请求</tspan><tspan y="60" x="6.4">1. 请求行（请求头，普通头，实体头）</tspan><tspan y="80.8" x="6.4">2.HTTP头</tspan><tspan y="101.6" x="6.4">3.空格</tspan><tspan y="122.4" x="6.4">4. 内容</tspan></text></g><g transform="translate(1414.92,234.24)" id="shape4"><path fill="#ffffff" d="M179.6,53.8L179.6,0L0,0L0,53.8L179.6,53.8z" stroke-width="1.33333" stroke="#002060"/><text class="st1"><tspan y="35.7" x="48.3">Http请求</tspan></text></g><g transform="translate(2052.35,359.24)" id="shape5"><path fill="#ffffff" d="M373.3,146.8L373.3,0L0,0L0,146.8L373.3,146.8z" stroke="#002060"/><text class="st2"><tspan y="20" x="6.5">Htt相应</tspan><tspan y="60" x="6.5">1.状态行：HTTP协议版本号， 状态码， 状态消息</tspan><tspan y="80.8" x="6.5">2.消息报头：Content-Type:指定了MIME类型的</tspan><tspan y="101.6" x="6.5">HTML(text/html),编码类型是UTF-8</tspan><tspan y="122.4" x="6.5">3.空行</tspan><tspan y="143.2" x="6.5">4.响应正文</tspan></text></g><g transform="translate(2140,234.24)" id="shape6"><path fill="#ffffff" d="M198,58.5L198,0L0,0L0,58.5L198,58.5z" stroke="#002060"/><text class="st2"><tspan y="35.6" x="68.8">Http响应</tspan></text></g><g transform="translate(1504.72,288)" id="shape7"><path fill="none" d="M0,0L0,79.5L-235.3,79.5L-235.3,105.3" stroke-width="2" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M-235.3,111.5L-231.1,104.2C-232.3,104.9,-233.8,105.3,-235.3,105.3C-236.9,105.3,-238.3,104.9,-239.6,104.2L-235.3,111.5" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(1471.72,367.5)" id="shape8"><path fill="none" d="M0,0L321.3,0L321.3,6.8" stroke-width="2" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M321.3,13L325.5,5.7C324.3,6.4,322.8,6.8,321.3,6.8C319.7,6.8,318.3,6.4,317.1,5.7L321.3,13" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(2239,292.74)" id="shape9"><path fill="none" d="M0,0L0,60.3" stroke-width="2" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M0,66.5L4.2,59.2C3,59.9,1.5,60.3,0,60.3C-1.5,60.3,-3,59.9,-4.2,59.2L0,66.5" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(1504.72,234.24)" id="shape10"><path fill="none" d="M0,-5.2L0,-32L284,-32L284,-133.5" stroke-width="2" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M5.2,-5.2L0,0L-5.2,-5.2L5.2,-5.2" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(1788.72,202.24)" id="shape11"><path fill="none" d="M0,0L450.3,0L450.3,25.8" stroke-width="2" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M450.3,32L454.5,24.7C453.3,25.4,451.8,25.8,450.3,25.8C448.7,25.8,447.3,25.4,446,24.7L450.3,32" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(1098.88,562)" id="shape12"><path fill="#ffffff" d="M341,151L341,0L0,0L0,151L341,151z" stroke="#002060"/><text class="st3"><tspan y="15.2" x="6.4">GET /562f25980001b1b106000338.jpg HTTP/1.1</tspan><tspan y="31.2" x="6.4">Host    img.mukewang.com</tspan><tspan y="47.2" x="6.4">User-Agent    Mozilla/5.0 (Windows NT 10.0; WOW64) </tspan><tspan y="63.2" x="6.4">AppleWebKit/537.36 (KHTML, like Gecko) Chrome/</tspan><tspan y="79.2" x="6.4">51.0.2704.106 Safari/537.36</tspan><tspan y="95.2" x="6.4">Accept    image/webp,image/*,*/*;q=0.8</tspan><tspan y="111.2" x="6.4">Referer    http://www.imooc.com/</tspan><tspan y="127.2" x="6.4">Accept-Encoding    gzip, deflate, sdch</tspan><tspan y="143.2" x="6.4">Accept-Language    zh-CN,zh;q=0.8</tspan></text></g><g transform="translate(1269.38,510)" id="shape13"><path fill="none" d="M0,0L0,45.8" stroke-width="2" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M0,52L4.2,44.7C3,45.4,1.5,45.8,0,45.8C-1.5,45.8,-3,45.4,-4.2,44.7L0,52" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(1438.72,411)" id="shape14"><text class="st4"><tspan y="28" x="7.2">Get和Post最大的区</tspan><tspan y="43.2" x="8">别是，Get没有请求</tspan><tspan y="58.4" x="52.8">内容</tspan></text></g><g transform="translate(1605.28,538.5)" id="shape15"><path fill="#ffffff" d="M375.5,198L375.5,0L0,0L0,198L375.5,198z" stroke="#002060"/><text class="st2"><tspan y="18.4" x="6.6">POST / HTTP1.1</tspan><tspan y="37.6" x="6.6">Host:www.wrox.com</tspan><tspan y="56.8" x="6.6">User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; </tspan><tspan y="76" x="6.6">Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET </tspan><tspan y="95.2" x="6.6">CLR 3.0.04506.648; .NET CLR 3.5.21022)</tspan><tspan y="114.4" x="6.6">Content-Type:application/x-www-form-urlencoded</tspan><tspan y="133.6" x="6.6">Content-Length:40</tspan><tspan y="152.8" x="6.6">Connection: Keep-Alive</tspan><tspan y="191.2" x="6.6">name=Professional%20Ajax&amp;publisher=Wiley</tspan></text></g><g transform="translate(1793.02,506)" id="shape16"><path fill="none" d="M0,0L0,28.1" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M0,32.5L3,27.3C2.1,27.8,1.1,28.1,0,28.1C-1.1,28.1,-2.1,27.8,-3,27.3L0,32.5" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(2050.17,552.41)" id="shape17"><path fill="#ffffff" d="M375.5,198L375.5,0L0,0L0,198L375.5,198z" stroke="#002060"/><text class="st2"><tspan y="18.4" x="6.6">HTTP/1.1 200 OK</tspan><tspan y="37.6" x="6.6">Date: Fri, 22 May 2009 06:07:21 GMT</tspan><tspan y="56.8" x="6.6">Content-Type: text/html; charset=UTF-8</tspan><tspan y="95.2" x="6.6">&lt;html></tspan><tspan y="114.4" x="6.6">      &lt;head>&lt;/head></tspan><tspan y="133.6" x="6.6">      &lt;body></tspan><tspan y="152.8" x="6.6">            &lt;!--body goes here--></tspan><tspan y="172" x="6.6">      &lt;/body></tspan><tspan y="191.2" x="6.6">&lt;/html></tspan></text></g><g transform="translate(2239,506)" id="shape18"><path fill="none" d="M0,0L0,14.4L-1.1,14.4L-1.1,42" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M-1.1,46.4L1.9,41.2C1,41.7,0,42,-1.1,42C-2.2,42,-3.2,41.7,-4.1,41.2L-1.1,46.4" stroke-width="1" stroke="#236ea1"/></g><path fill="none" d="M0,0L7,0C8.9,-0.3,10.9,.4,12.3,1.7C13.6,3.1,14.3,5.1,14,7L14,115.4C13.7,117.3,14.4,119.3,15.7,120.7C17.1,122,19.1,122.7,21,122.4C19.1,122.1,17.1,122.8,15.7,124.2C14.4,125.5,13.7,127.5,14,129.4L14,237.8C14.3,239.8,13.6,241.7,12.3,243.1C10.9,244.5,8.9,245.1,7,244.8L0,244.8" transform="matrix(-1,0,0,1,2565,529)" stroke="#83b3e3" id="shape19"/><g transform="translate(2425.65,651.41)" id="shape20"><path fill="none" d="M0,0L116,0" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M120.4,0L115.2,-3C115.7,-2.1,116,-1.1,116,0C116,1.1,115.7,2.1,115.2,3L120.4,0" stroke-width="1" stroke="#236ea1"/><rect width="41.7" fill="#ffffff" y="-7.6" height="15.2" x="42.3"/><text class="st5"><tspan y="5.2" x="42.2">状态码</tspan></text></g><g transform="translate(2590.26,552.41)" id="shape21"><path fill="#ffffff" d="M375.5,198L375.5,0L0,0L0,198L375.5,198z"/><text class="st2"><tspan y="20" x="6.6">1xx：指示信息--表示请求已接收，继续处理</tspan><tspan y="60" x="6.6">2xx：成功--表示请求已被成功接收、理解、接受</tspan><tspan y="100" x="6.6">3xx：重定向--要完成请求必须进行更进一步的操作</tspan><tspan y="140" x="6.6">4xx：客户端错误--请求有语法错误或请求无法实现</tspan><tspan y="180" x="6.6">5xx：服务器端错误--服务器未能实现合法的请求</tspan></text></g></svg></div>
+        <div id="copyright">Powered by <a href="https://www.edrawsoft.com/" target="_blank" title="edrawsoft">Edraw Max</a></div>
+      </div>
+      <div id="navBar">
+        <div id="nav-thumbs">
+          <div class="nav-thumb">
+            <div>
+              <span class="number">
+                <span class="pagenum">1</span>
+              </span>
+              <a href="#page1">
+                <img src="data:image/png;base64,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"/>
+              </a>
+            </div>
+            <p>页-1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        const svgs=document.getElementById("svg-container").children;
+        const UA=window.navigator.userAgent;
+        const ua=(UA.indexOf('rv:11')+UA.indexOf('Firefox'))>=0;
+        const svgcount=document.getElementById('svg-container').childElementCount;
+        var styleArr=[];
+        var heightArr=[];
+        var navBar=document.getElementById('navBar');
+        var conInfo=document.getElementById('content-info');
+        for(var i=0;i<svgcount;i++){
+            styleArr[i] = {width:svgs[i].getAttribute('width'),height:svgs[i].getAttribute('height')}
+        }
+        window.onresize=function () {
+            renavstyle();
+            resvgstyle();
+        };
+        window.onscroll=renavstyle;
+        window.onload=function () {
+            renavstyle();
+            var sideWidth=navBar.offsetWidth;
+            document.getElementById('content-info').style.marginRight=sideWidth+'px';
+            document.getElementById('main-content').style.marginRight=sideWidth+'px';
+            resvgstyle();
+            doscroll();
+        };
+        function recontainstyle() {
+            var topHeight=conInfo.clientHeight;
+            var svgHeight=0;
+            for(var i=0;i<svgcount;i++){
+                heightArr[i]=svgs[i].getBoundingClientRect().height+10;
+                svgHeight+=svgs[i].clientHeight ||svgs[i].getBoundingClientRect().height;
+            }
+            var fullHeight=svgHeight+Number(topHeight);
+            if(fullHeight<window.innerHeight){
+            document.getElementById('copyright').style.position='absolute';
+            document.getElementById('copyright').style.transform ='translateX(-50%)';
+            document.getElementById('main-content').style.position='absolute';
+            document.getElementById('main-content').style.top=topHeight+'px';
+        }else{
+            document.getElementById('copyright').style.position='';
+            document.getElementById('copyright').style.transform ='';
+            document.getElementById('main-content').style.position='';
+        }
+        }
+        function resvgstyle() {
+            var sideWidth=navBar.offsetWidth+20;
+            for(var i=0;i<svgcount;i++){
+                var oriWidth = styleArr[i].width;
+                var oriHeight = styleArr[i].height;
+                var percent = oriHeight / oriWidth;
+                var innerWidth=document.body.offsetWidth-sideWidth;
+                if (innerWidth <= oriWidth) {
+                    svgs[i].removeAttribute('width');
+                    svgs[i].removeAttribute('height');
+                    if (ua) {
+                        svgs[i].setAttribute('height',innerWidth*percent);
+                    }
+                }else {
+                    svgs[i].setAttribute('width', oriWidth);
+                    svgs[i].setAttribute('height', oriHeight);
+                }
+            }
+            recontainstyle();
+        }
+        function renavstyle() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            if(scrollTop>topHeight){
+                document.getElementById('navBar').style.top=0+'px';
+            }else{
+                document.getElementById('navBar').style.top=topHeight-scrollTop+'px';
+            }
+            doscroll();
+        }
+        function doscroll() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            for(var i=0;i<svgcount;i++){
+                var sum=0;
+                for(var j=0;j<=i;j++){
+                    sum+=heightArr[j];
+                }
+                if(scrollTop+window.innerHeight/2-topHeight-sum<0){
+                    var sub=Number(i)+1;
+                    if(document.querySelector('#nav-thumbs .selected')){
+                        document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                    }
+                    document.querySelector('.nav-thumb:nth-of-type('+sub+')').classList.add('selected');
+                    break;
+                }
+            }
+        }
+        var navs=document.querySelectorAll('.nav-thumb');
+        for(i=0;i<navs.length;i++){
+            navs[i].children[0].onclick=function () {
+                document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                this.parentNode.classList.add('selected');
+            }
+        }
+</script>
+  </body>
+</html>

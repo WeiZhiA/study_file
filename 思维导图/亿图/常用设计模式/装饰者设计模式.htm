@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!-- saved from url=(0016)http://localhost -->
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>装饰者设计模式</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #content-info{
+            width: auto;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #author-info{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        #title{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding-top: 10px;
+            margin-bottom: 2px;
+            font-size: 34px;
+            color: #505050;
+        }
+        .text{
+            white-space:nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 2px;
+            font-size: 20px;
+            color: #8c8c8c;
+        }
+        #navBar{
+            position: fixed;
+            right:0;
+            bottom: 0;
+            background-color: #f0f3f4;
+            overflow-y: auto;
+            text-align: center;
+        }
+        #svg-container{
+            width: 100%;
+            min-width: 0;
+            margin: 0 10px;
+        }
+        #nav-thumbs{
+            padding: 0 5px;
+        }
+        .nav-thumb{
+            position: relative;
+            margin: 10px auto;
+        }
+        .nav-thumb >p{
+            text-align: center;
+            font-size: 12px;
+            margin: 4px 0 0 0;
+        }
+        .nav-thumb >div{
+            position: relative;
+            display: inline-block;
+            border: 1px solid #c6cfd5;
+        }
+        .nav-thumb img{
+            display: block;
+        }
+        .nav-thumb span{
+            pointer-events: none;
+        }
+        #main-content{
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #d0cfd8;
+            display: flex;
+            height: auto;
+            flex-flow: row wrap;
+            text-align:center;
+        }
+        #svg-container >svg{
+            display: block;
+            margin:10px auto;
+            margin-bottom: 0;
+        }
+        #copyright{
+            bottom: 0;
+            left: 50%;
+            margin: 5px auto;
+            font-size: 16px;
+            color: #515151;
+        }
+        #copyright >a{
+            text-decoration: none;
+            color: #77C;
+        }
+        .number{
+            position: absolute;
+            top:0;
+            left:0;
+            border-top:22px solid #76838f;
+            border-right: 22px solid transparent;
+        }
+        .pagenum{
+            font-size: 12px;
+            color: #fff;
+            position: absolute;
+            top: -23px;
+            left: 2px;
+        }
+        #navBar::-webkit-scrollbar{
+            width: 8px;
+            background-color: #f5f5f5;
+        }
+        #navBar::-webkit-scrollbar-track{
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        #navBar::-webkit-scrollbar-thumb{
+            border-radius: 8px;
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            background-color: #6b6b70;
+        }
+        #navBar::-webkit-scrollbar-thumb:hover{
+            background-color: #4a4a4f;
+        }
+        .nav-thumb >div:hover{
+            box-shadow:1px 1px 4px rgba(0,0,0,.4);
+        }
+        .selected .number{
+            border-color: #08a1ef transparent;
+        }
+</style>
+  </head>
+  <body>
+    <div id="main-area">
+      <div id="content-info">
+        <div id="title">装饰者设计模式</div>
+        <div id="author-info">
+          <div class="text" id="author-name">Administrator</div>
+          <div class="text" id="share-time">2019-09-01</div>
+        </div>
+      </div>
+      <div id="main-content">
+        <div id="svg-container"><svg width="3367" xmlns:xlink="http://www.w3.org/1999/xlink" height="1587" xmlns:ev="http://www.w3.org/2001/xml-events" viewBox="0 0 3368 1587" id="page1" preserveAspectRadio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg"><style type="text/css"><![CDATA[
+.st1 {fill:#000000;font-family:Arial;font-size:10pt}
+.st5 {fill:#1f6391;font-family:宋体;font-size:10pt}
+.st7 {fill:#a2516c}
+.st2 {fill:#ff0000}
+.st4 {fill:#ffffff;font-family:宋体;font-size:10pt}
+.st6 {font-family:Arial}
+.st3 {font-size:13pt}
+]]></style><defs/><rect width="3368" fill="#ffffff" y="0" height="1587" x="0" stroke="#808080"/><g transform="translate(519.5,99)" id="shape1"><path fill="#ffffff" d="M132,24L132,0L0,0L0,24L132,24z" stroke="#ffffff"/><text class="st1"><tspan y="16.4" x="18.4">装饰者设计模式</tspan></text></g><g transform="translate(1078.5,40.85)" id="shape2"><path fill="#ffffff" d="M671,322.1L671,0L0,0L0,322.1L671,322.1z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.4">使用场景：</tspan><tspan y="32.8" x="6.4">1.需要</tspan><tspan class="st2">增强一个对象中某些函数的功能</tspan><tspan>。</tspan><tspan y="49.6" x="6.4">2.需要</tspan><tspan class="st2">动态地给一个对象增加功能，这些功能可以再动态地撤销。(使用继承，一旦继承无法修改，不利于后期</tspan><tspan y="66.4" class="st2" x="6.4">动态修改)</tspan><tspan y="83.2" x="6.4">3.需要增加 由一些基本功能排列组合 而产生的大量功能，从而使继承体系大爆炸。</tspan><tspan y="116" x="6.4">优点:</tspan><tspan class="st2">装饰器模式是一种用于代替继承的技术，无需通过继承增加子类就能扩展对象的新功能。使用对象的关联</tspan><tspan y="132.8" class="st2" x="6.4">关系代替继承关系，更加灵活，同时避免类型体系的快速膨胀</tspan><tspan y="149.6" x="6.4">•扩展对象功能，比继承灵活，不会导致类个数急剧增加</tspan><tspan y="166.4" x="6.4"> •可以对一个对象进行多次装饰，创造出不同行为的组合，得到功能更加强大的对象</tspan><tspan y="183.2" x="6.4"> •具体构建类和具体装饰类可以独立变化，用户可以根据需要自己增加新的具体构件子类和具体装饰子类</tspan><tspan y="199.2" x="6.4"> </tspan><tspan y="216" x="6.4">缺点：</tspan><tspan y="232.8" x="6.4"> •产生很多小对象。大量小对象占据内存，一定程度上影响性能</tspan><tspan y="249.6" x="6.4"> •装饰模式易于出错，调试排查比较麻烦</tspan><tspan y="282.4" class="st2" x="6.4">再不改变原有类的代码的情况下，增加类的功能。如果是继承一旦完成功能就定死了，如果需要修改则需要改</tspan><tspan y="299.2" class="st2" x="6.4">动原有的</tspan></text></g><g transform="translate(438.5,396.58)" id="shape3"><path fill="none" d="M0,0L0,-65.6L283.5,-65.6L283.5,-136.2" stroke="#118972" stroke-dasharray="11,5"/><path stroke-linecap="round" fill="none" d="M283.5,-143.2L279.5,-136.2L287.5,-136.2L283.5,-143.2" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(1014.5,396.58)" id="shape4"><path fill="none" d="M0,0L0,-65.4L-292.5,-65.4L-292.5,-136.2" stroke="#118972" stroke-dasharray="11,5"/><path stroke-linecap="round" fill="none" d="M-292.5,-143.2L-296.5,-136.2L-288.5,-136.2L-292.5,-143.2" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(888,568.3)" id="shape5"><path fill="none" d="M0,0L0,-48.1L126.5,-48.1L126.5,-75.8" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M126.5,-82.7L122.5,-75.8L130.5,-75.8L126.5,-82.7" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(1159.5,569.88)" id="shape6"><path fill="none" d="M0,0L0,-49.7L-145,-49.7L-145,-77.4" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M-145,-84.3L-149,-77.4L-141,-77.4L-145,-84.3" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(57,64.85)" id="shape7"><path fill="#ffffff" d="M395,176.1L395,0L0,0L0,176.1L395,176.1z" stroke="#ffffff"/><text class="st1"><tspan y="20.8" class="st3" x="6.4">装饰者模式具有的一些特征</tspan><tspan y="38.4" x="6.4">1，装饰者（decorator）和被装饰（扩展）的对象有着</tspan><tspan class="st2">相同的超</tspan><tspan y="55.2" class="st2" x="6.4">类</tspan><tspan>（supertype）。</tspan><tspan y="72" x="6.4">2，我们可以用</tspan><tspan class="st2">多个装饰者去装饰一个对象</tspan><tspan>。</tspan><tspan y="88.8" x="6.4">3，我们可以用</tspan><tspan class="st2">装饰过的对象替换代码中的原对象，而不会出问</tspan><tspan y="105.6" class="st2" x="6.4">题（因为他们有相同的超类）。</tspan><tspan y="122.4" x="6.4">4，装饰者可以在委托（delegate，即调用被装饰的类的成员完</tspan><tspan y="139.2" x="6.4">成一些工作）</tspan><tspan class="st2">被装饰者的行为完成之前或之后加上他自己的行</tspan><tspan y="156" class="st2" x="6.4">为</tspan><tspan>。</tspan><tspan y="172.8" x="6.4">5，一个</tspan><tspan class="st2">对象能在任何时候被装饰，甚至是运行时</tspan></text></g><g transform="translate(895,1002)" id="shape8"><path fill="none" d="M360,178.5L360,0L0,0L0,178.5L360,178.5z" stroke="#000000"/><text class="st1"><tspan y="15.2" x="6.4">ConcreteComponentA comA = new </tspan><tspan y="31.2" x="6.4">ConcreteComponentA();</tspan><tspan y="63.2" x="6.4">DecorateDecoratorA decA = new DecorateDecoratorA();</tspan><tspan y="79.2" x="6.4">DecorateDecoratorB decB = newDecorateDecoretorB();</tspan><tspan y="111.2" class="st2" x="6.4">decA.setCon(conA);</tspan><tspan y="127.2" class="st2" x="6.4">decB.setCon(decA);</tspan><tspan y="159.2" class="st2" x="6.4">decB.Operation();</tspan><tspan y="175.2" x="6.4"> </tspan></text></g><g transform="translate(635,150.43)" id="table9"><g><path fill="#3498db" d="M0,0L174,0L174,44L0,44L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="19.6" x="40.2">&lt;&lt;Interface>></tspan><tspan y="34.8" x="47.4">Comperation</tspan></text></g><g><path fill="#e8eff8" d="M0,44L174,44L174,74L0,74L0,44z" stroke="#7e7e7e"/><text class="st5"/></g><g><path fill="#ffffff" d="M0,74L174,74L174,103L0,103L0,74z" stroke="#7e7e7e"/><text class="st5"><tspan y="93" x="11.4">+Operation</tspan></text></g></g><g transform="translate(324,396.58)" id="table10"><g><path fill="#3498db" d="M0,0L229,0L229,32.9L0,32.9L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="21.6" x="18.6">ConcreteComponent(被装饰者)</tspan></text></g><g><path fill="#e8eff8" d="M0,32.9L229,32.9L229,62.9L0,62.9L0,32.9z" stroke="#7e7e7e"/><text class="st5"/></g><g><path fill="#ffffff" d="M0,62.9L229,62.9L229,91.9L0,91.9L0,62.9z" stroke="#7e7e7e"/><text class="st5"><tspan y="81.1" class="st6" x="11.4">+Operation()</tspan></text></g></g><g transform="translate(900,396.58)" id="table11"><g><path fill="#3498db" d="M0,0L229,0L229,29L0,29L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="19.7" x="25.8">Decorator(装饰者abstract)</tspan></text></g><g><path fill="#e8eff8" d="M0,29L229,29L229,59L0,59L0,29z" stroke="#7e7e7e"/><text class="st5"><tspan y="47.2" class="st6" x="11.4">+component:Component</tspan></text></g><g><path fill="#ffffff" d="M0,59L229,59L229,89L0,89L0,59z" stroke="#7e7e7e"/><text class="st5"><tspan y="77.2" class="st6" x="11.4">+Operation()</tspan></text></g></g><g transform="translate(773.5,568.3)" id="table12"><g><path fill="#3498db" d="M0,0L229,0L229,31.9L0,31.9L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="21.1" x="21.8">DecorateDecoratorA(装饰者)</tspan></text></g><g><path fill="#e8eff8" d="M0,31.9L229,31.9L229,64.9L0,64.9L0,31.9z" stroke="#7e7e7e"/><text class="st5"><tspan y="50.1" class="st6" x="11.4">addedState: String</tspan></text></g><g><path fill="#ffffff" d="M0,64.9L229,64.9L229,97.8L0,97.8L0,64.9z" stroke="#7e7e7e"/><text class="st5"><tspan y="83.1" class="st6" x="11.4">+Operation()</tspan></text></g></g><g transform="translate(1045,569.87)" id="table13"><g><path fill="#3498db" d="M0,0L229,0L229,29.4L0,29.4L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="19.9" x="21.8">DecorateDecoratorB(装饰者)</tspan></text></g><g><path fill="#e8eff8" d="M0,29.4L229,29.4L229,59.7L0,59.7L0,29.4z" stroke="#7e7e7e"/><text class="st5"><tspan y="47.6" class="st6" x="11.4">addedState: String</tspan></text></g><g><path fill="#ffffff" d="M0,59.7L229,59.7L229,106.3L0,106.3L0,59.7z" stroke="#7e7e7e"/><text class="st5"><tspan y="77.9" class="st6" x="11.4">+Operation()</tspan><tspan y="93.9" class="st6" x="11.4">-AddedBehave()</tspan></text></g></g><g transform="translate(1129,441.08)" id="shape14"><path fill="none" d="M18.7,0L32,0L32,-239.2L-320,-239.2" stroke="#2d85c1"/><path stroke-linecap="round" fill="none" d="M0,0L9.4,5.4L18.7,0L9.4,-5.4L0,0" stroke-width="1" stroke="#2d85c1" stroke-linejoin="round"/></g><g transform="translate(1340,367)" id="shape15"><path fill="#ffffff" d="M331,171.1L331,0L0,0L0,171.1L331,171.1z" stroke="#000000"/><text class="st1"><tspan y="15.2" x="6.4">abstract class Decorator{</tspan><tspan y="31.2" x="6.4"> </tspan><tspan class="st2"> protected Componet component;</tspan><tspan y="47.2" x="6.4">    public void SetComponent(Component com){}</tspan><tspan y="79.2" x="6.4"> </tspan><tspan class="st7">public override void Operation(){</tspan><tspan y="95.2" class="st7" x="6.4">        if(component != null)</tspan><tspan y="111.2" class="st7" x="6.4">             component.operator();</tspan><tspan y="127.2" class="st7" x="6.4">    }</tspan><tspan y="143.2" x="6.4">}</tspan></text></g><g transform="translate(1340,569.88)" id="shape16"><path fill="#ffffff" d="M331,171.1L331,0L0,0L0,171.1L331,171.1z" stroke="#000000"/><text class="st1"><tspan y="15.2" x="6.4">abstract class DecorateDecoratorB{</tspan><tspan y="31.2" x="6.4">    protected String addState;</tspan><tspan y="47.2" x="6.4">    public void SetComponent(Component com){}</tspan><tspan y="63.2" x="6.4"> </tspan><tspan class="st7"> public override void Operation(){</tspan><tspan y="79.2" class="st7" x="6.4">          base.Operation();</tspan><tspan y="95.2" class="st7" x="6.4">          AddBehavior();</tspan><tspan y="111.2" class="st7" x="6.4">    }</tspan><tspan y="143.2" x="6.4">   private void AddedBehavion();</tspan><tspan y="159.2" x="6.4">}</tspan></text></g><g transform="translate(2882.42,346.85)" id="shape17"><path fill="none" d="M0,0L0,-49.8L-0.4,-87.1" stroke="#118972" stroke-dasharray="11,5"/><path stroke-linecap="round" fill="none" d="M-0.4,-94L-4.4,-87L3.6,-87.1L-0.4,-94" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(2444,501.42)" id="shape18"><path fill="none" d="M0,0L29,0L29,-294.5L323.5,-294.5" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M315.5,-298.5L323.5,-294.5L315.5,-290.5" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(2628.5,523.21)" id="shape19"><path fill="none" d="M0,0L0,-48.1L253.9,-48.1L253.9,-78.4" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M253.9,-85.4L249.9,-78.4L257.9,-78.4L253.9,-85.4" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(2883,519)" id="shape20"><path fill="none" d="M0,0L0,-42.1L-0.5,-74.2" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M-0.6,-81.2L-4.5,-74.2L3.5,-74.3L-0.6,-81.2" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(2473,501.42)" id="shape21"><path fill="none" d="M0,0L0,70.7L41,70.7" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M36,65.7L41,70.7L36,75.7" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(2055,198.35)" id="shape22"><path fill="none" d="M360,54.5L360,0L0,0L0,54.5L360,54.5z" stroke="#000000"/><text class="st1"><tspan y="16" x="6.4">如果只有一个被装饰类的话,</tspan><tspan class="st2">就不需要Comperation，直接</tspan><tspan y="32.8" class="st2" x="6.4">让Decorator继承被装饰类就好了</tspan><tspan>，如右图</tspan></text></g><g transform="translate(2767.5,161)" id="table23"><g><path fill="#3498db" d="M0,0L229,0L229,32.9L0,32.9L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="21.6" x="18.6">ConcreteComponent(被装饰者)</tspan></text></g><g><path fill="#e8eff8" d="M0,32.9L229,32.9L229,62.9L0,62.9L0,32.9z" stroke="#7e7e7e"/><text class="st5"/></g><g><path fill="#ffffff" d="M0,62.9L229,62.9L229,91.9L0,91.9L0,62.9z" stroke="#7e7e7e"/><text class="st5"><tspan y="81.1" class="st6" x="11.4">+Operation()</tspan></text></g></g><g transform="translate(2760.84,346.85)" id="table24"><g><path fill="#3498db" d="M0,0L243.2,0L243.2,29.7L0,29.7L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="20" x="33">Decorator(装饰者abstract)</tspan></text></g><g><path fill="#e8eff8" d="M0,29.7L243.2,29.7L243.2,60.3L0,60.3L0,29.7z" stroke="#7e7e7e"/><text class="st5"><tspan y="47.9" class="st6" x="11.4">+component:Component</tspan></text></g><g><path fill="#ffffff" d="M0,60.3L243.2,60.3L243.2,91L0,91L0,60.3z" stroke="#7e7e7e"/><text class="st5"><tspan y="78.5" class="st6" x="11.4">+Operation()</tspan></text></g></g><g transform="translate(2514,523.21)" id="table25"><g><path fill="#3498db" d="M0,0L229,0L229,31.9L0,31.9L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="21.1" x="21.8">DecorateDecoratorA(装饰者)</tspan></text></g><g><path fill="#e8eff8" d="M0,31.9L229,31.9L229,64.9L0,64.9L0,31.9z" stroke="#7e7e7e"/><text class="st5"><tspan y="50.1" class="st6" x="11.4">addedState: String</tspan></text></g><g><path fill="#ffffff" d="M0,64.9L229,64.9L229,97.8L0,97.8L0,64.9z" stroke="#7e7e7e"/><text class="st5"><tspan y="83.1" class="st6" x="11.4">+Operation()</tspan></text></g></g><g transform="translate(2768.5,519)" id="table26"><g><path fill="#3498db" d="M0,0L229,0L229,29.4L0,29.4L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="19.9" x="21.8">DecorateDecoratorB(装饰者)</tspan></text></g><g><path fill="#e8eff8" d="M0,29.4L229,29.4L229,59.7L0,59.7L0,29.4z" stroke="#7e7e7e"/><text class="st5"><tspan y="47.6" class="st6" x="11.4">addedState: String</tspan></text></g><g><path fill="#ffffff" d="M0,59.7L229,59.7L229,106.3L0,106.3L0,59.7z" stroke="#7e7e7e"/><text class="st5"><tspan y="77.9" class="st6" x="11.4">+Operation()</tspan><tspan y="93.9" class="st6" x="11.4">-AddedBehave()</tspan></text></g></g><g transform="translate(3040,523.57)" id="table27"><g><path fill="#3498db" d="M0,0L229,0L229,29L0,29L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="19.7" x="21.8">DecorateDecoratorB(装饰者)</tspan></text></g><g><path fill="#e8eff8" d="M0,29L229,29L229,59.4L0,59.4L0,29z" stroke="#7e7e7e"/><text class="st5"><tspan y="47.2" class="st6" x="11.4">addedState: String</tspan></text></g><g><path fill="#ffffff" d="M0,59.4L229,59.4L229,105.9L0,105.9L0,59.4z" stroke="#7e7e7e"/><text class="st5"><tspan y="77.6" class="st6" x="11.4">+Operation()</tspan><tspan y="93.6" class="st6" x="11.4">-AddedBehave()</tspan></text></g></g><g transform="translate(2882.42,437.85)" id="shape28"><path fill="none" d="M0,6.9L0,38L272.1,38L272.1,85.7" stroke="#2d85c1"/><path stroke-linecap="round" fill="none" d="M0,0L-4,6.9L4,6.9L0,0" stroke-width="1" stroke="#2d85c1" stroke-linejoin="round"/></g><g transform="translate(313,570.72)" id="shape29"><path fill="none" d="M0,0L0,-48.1L126.5,-48.1L126.5,-75.8" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M126.5,-82.7L122.5,-75.8L130.5,-75.8L126.5,-82.7" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(584.5,572.3)" id="shape30"><path fill="none" d="M0,0L0,-49.7L-145,-49.7L-145,-77.4" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M-145,-84.3L-149,-77.4L-141,-77.4L-145,-84.3" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(198.5,570.72)" id="table31"><g><path fill="#3498db" d="M0,0L229,0L229,31.9L0,31.9L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="21.1" x="21.8">ConcreteComponentA(装饰者)</tspan></text></g><g><path fill="#e8eff8" d="M0,31.9L229,31.9L229,64.9L0,64.9L0,31.9z" stroke="#7e7e7e"/><text class="st5"><tspan y="50.1" class="st6" x="11.4">addedState: String</tspan></text></g><g><path fill="#ffffff" d="M0,64.9L229,64.9L229,97.8L0,97.8L0,64.9z" stroke="#7e7e7e"/><text class="st5"><tspan y="83.1" class="st6" x="11.4">+Operation()</tspan></text></g></g><g transform="translate(470,572.3)" id="table32"><g><path fill="#3498db" d="M0,0L229,0L229,29.4L0,29.4L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="19.9" x="21.8">ConcreteComponentB(装饰者)</tspan></text></g><g><path fill="#e8eff8" d="M0,29.4L229,29.4L229,59.7L0,59.7L0,29.4z" stroke="#7e7e7e"/><text class="st5"><tspan y="47.6" class="st6" x="11.4">addedState: String</tspan></text></g><g><path fill="#ffffff" d="M0,59.7L229,59.7L229,106.3L0,106.3L0,59.7z" stroke="#7e7e7e"/><text class="st5"><tspan y="77.9" class="st6" x="11.4">+Operation()</tspan><tspan y="93.9" class="st6" x="11.4">-AddedBehave()</tspan></text></g></g><g transform="translate(709,984)" id="table33"><g><path fill="#3498db" d="M0,0L122,0L122,31.9L0,31.9L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="21.1" x="41">调用者</tspan></text></g><g><path fill="#e8eff8" d="M0,31.9L122,31.9L122,66L0,66L0,31.9z" stroke="#7e7e7e"/><text class="st5"><tspan y="54.1" x="25">Attributes</tspan></text></g></g><g transform="translate(313,668.57)" id="shape34"><path fill="none" d="M0,0L0,283.4L457,283.4L457,315.4" stroke="#2d85c1" stroke-dasharray="6,4"/><path stroke-linecap="round" fill="none" d="M-6,12L0,0L6,12" stroke-width="1" stroke="#2d85c1" stroke-linejoin="round"/></g><g transform="translate(584.5,678.57)" id="shape35"><path fill="none" d="M0,0L0,273.4L185.5,273.4L185.5,305.4" stroke="#2d85c1" stroke-dasharray="6,4"/><path stroke-linecap="round" fill="none" d="M-6,12L0,0L6,12" stroke-width="1" stroke="#2d85c1" stroke-linejoin="round"/></g><g transform="translate(888,666.15)" id="shape36"><path fill="none" d="M0,0L0,285.9L-118,285.9L-118,317.9" stroke="#2d85c1" stroke-dasharray="6,4"/><path stroke-linecap="round" fill="none" d="M-6,12L0,0L6,12" stroke-width="1" stroke="#2d85c1" stroke-linejoin="round"/></g><g transform="translate(1159.5,676.15)" id="shape37"><path fill="none" d="M0,0L0,275.9L-389.5,275.9L-389.5,307.9" stroke="#2d85c1" stroke-dasharray="6,4"/><path stroke-linecap="round" fill="none" d="M-6,12L0,0L6,12" stroke-width="1" stroke="#2d85c1" stroke-linejoin="round"/></g><g transform="translate(2322,468.42)" id="table38"><g><path fill="#3498db" d="M0,0L122,0L122,31.9L0,31.9L0,0z" stroke="#7e7e7e"/><text class="st4"><tspan y="21.1" x="41">调用者</tspan></text></g><g><path fill="#e8eff8" d="M0,31.9L122,31.9L122,66L0,66L0,31.9z" stroke="#7e7e7e"/><text class="st5"><tspan y="54.1" x="25">Attributes</tspan></text></g></g></svg></div>
+        <div id="copyright">Powered by <a href="https://www.edrawsoft.com/" target="_blank" title="edrawsoft">Edraw Max</a></div>
+      </div>
+      <div id="navBar">
+        <div id="nav-thumbs">
+          <div class="nav-thumb">
+            <div>
+              <span class="number">
+                <span class="pagenum">1</span>
+              </span>
+              <a href="#page1">
+                <img src="data:image/png;base64,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"/>
+              </a>
+            </div>
+            <p>页-1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        const svgs=document.getElementById("svg-container").children;
+        const UA=window.navigator.userAgent;
+        const ua=(UA.indexOf('rv:11')+UA.indexOf('Firefox'))>=0;
+        const svgcount=document.getElementById('svg-container').childElementCount;
+        var styleArr=[];
+        var heightArr=[];
+        var navBar=document.getElementById('navBar');
+        var conInfo=document.getElementById('content-info');
+        for(var i=0;i<svgcount;i++){
+            styleArr[i] = {width:svgs[i].getAttribute('width'),height:svgs[i].getAttribute('height')}
+        }
+        window.onresize=function () {
+            renavstyle();
+            resvgstyle();
+        };
+        window.onscroll=renavstyle;
+        window.onload=function () {
+            renavstyle();
+            var sideWidth=navBar.offsetWidth;
+            document.getElementById('content-info').style.marginRight=sideWidth+'px';
+            document.getElementById('main-content').style.marginRight=sideWidth+'px';
+            resvgstyle();
+            doscroll();
+        };
+        function recontainstyle() {
+            var topHeight=conInfo.clientHeight;
+            var svgHeight=0;
+            for(var i=0;i<svgcount;i++){
+                heightArr[i]=svgs[i].getBoundingClientRect().height+10;
+                svgHeight+=svgs[i].clientHeight ||svgs[i].getBoundingClientRect().height;
+            }
+            var fullHeight=svgHeight+Number(topHeight);
+            if(fullHeight<window.innerHeight){
+            document.getElementById('copyright').style.position='absolute';
+            document.getElementById('copyright').style.transform ='translateX(-50%)';
+            document.getElementById('main-content').style.position='absolute';
+            document.getElementById('main-content').style.top=topHeight+'px';
+        }else{
+            document.getElementById('copyright').style.position='';
+            document.getElementById('copyright').style.transform ='';
+            document.getElementById('main-content').style.position='';
+        }
+        }
+        function resvgstyle() {
+            var sideWidth=navBar.offsetWidth+20;
+            for(var i=0;i<svgcount;i++){
+                var oriWidth = styleArr[i].width;
+                var oriHeight = styleArr[i].height;
+                var percent = oriHeight / oriWidth;
+                var innerWidth=document.body.offsetWidth-sideWidth;
+                if (innerWidth <= oriWidth) {
+                    svgs[i].removeAttribute('width');
+                    svgs[i].removeAttribute('height');
+                    if (ua) {
+                        svgs[i].setAttribute('height',innerWidth*percent);
+                    }
+                }else {
+                    svgs[i].setAttribute('width', oriWidth);
+                    svgs[i].setAttribute('height', oriHeight);
+                }
+            }
+            recontainstyle();
+        }
+        function renavstyle() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            if(scrollTop>topHeight){
+                document.getElementById('navBar').style.top=0+'px';
+            }else{
+                document.getElementById('navBar').style.top=topHeight-scrollTop+'px';
+            }
+            doscroll();
+        }
+        function doscroll() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            for(var i=0;i<svgcount;i++){
+                var sum=0;
+                for(var j=0;j<=i;j++){
+                    sum+=heightArr[j];
+                }
+                if(scrollTop+window.innerHeight/2-topHeight-sum<0){
+                    var sub=Number(i)+1;
+                    if(document.querySelector('#nav-thumbs .selected')){
+                        document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                    }
+                    document.querySelector('.nav-thumb:nth-of-type('+sub+')').classList.add('selected');
+                    break;
+                }
+            }
+        }
+        var navs=document.querySelectorAll('.nav-thumb');
+        for(i=0;i<navs.length;i++){
+            navs[i].children[0].onclick=function () {
+                document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                this.parentNode.classList.add('selected');
+            }
+        }
+</script>
+  </body>
+</html>

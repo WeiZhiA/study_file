@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!-- saved from url=(0016)http://localhost -->
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Android的dex文件以及hook原理</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #content-info{
+            width: auto;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #author-info{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        #title{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding-top: 10px;
+            margin-bottom: 2px;
+            font-size: 34px;
+            color: #505050;
+        }
+        .text{
+            white-space:nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 2px;
+            font-size: 20px;
+            color: #8c8c8c;
+        }
+        #navBar{
+            position: fixed;
+            right:0;
+            bottom: 0;
+            background-color: #f0f3f4;
+            overflow-y: auto;
+            text-align: center;
+        }
+        #svg-container{
+            width: 100%;
+            min-width: 0;
+            margin: 0 10px;
+        }
+        #nav-thumbs{
+            padding: 0 5px;
+        }
+        .nav-thumb{
+            position: relative;
+            margin: 10px auto;
+        }
+        .nav-thumb >p{
+            text-align: center;
+            font-size: 12px;
+            margin: 4px 0 0 0;
+        }
+        .nav-thumb >div{
+            position: relative;
+            display: inline-block;
+            border: 1px solid #c6cfd5;
+        }
+        .nav-thumb img{
+            display: block;
+        }
+        .nav-thumb span{
+            pointer-events: none;
+        }
+        #main-content{
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #d0cfd8;
+            display: flex;
+            height: auto;
+            flex-flow: row wrap;
+            text-align:center;
+        }
+        #svg-container >svg{
+            display: block;
+            margin:10px auto;
+            margin-bottom: 0;
+        }
+        #copyright{
+            bottom: 0;
+            left: 50%;
+            margin: 5px auto;
+            font-size: 16px;
+            color: #515151;
+        }
+        #copyright >a{
+            text-decoration: none;
+            color: #77C;
+        }
+        .number{
+            position: absolute;
+            top:0;
+            left:0;
+            border-top:22px solid #76838f;
+            border-right: 22px solid transparent;
+        }
+        .pagenum{
+            font-size: 12px;
+            color: #fff;
+            position: absolute;
+            top: -23px;
+            left: 2px;
+        }
+        #navBar::-webkit-scrollbar{
+            width: 8px;
+            background-color: #f5f5f5;
+        }
+        #navBar::-webkit-scrollbar-track{
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        #navBar::-webkit-scrollbar-thumb{
+            border-radius: 8px;
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            background-color: #6b6b70;
+        }
+        #navBar::-webkit-scrollbar-thumb:hover{
+            background-color: #4a4a4f;
+        }
+        .nav-thumb >div:hover{
+            box-shadow:1px 1px 4px rgba(0,0,0,.4);
+        }
+        .selected .number{
+            border-color: #08a1ef transparent;
+        }
+</style>
+  </head>
+  <body>
+    <div id="main-area">
+      <div id="content-info">
+        <div id="title">Android的dex文件以及hook原理</div>
+        <div id="author-info">
+          <div class="text" id="author-name">Administrator</div>
+          <div class="text" id="share-time">2019-09-01</div>
+        </div>
+      </div>
+      <div id="main-content">
+        <div id="svg-container"><svg width="2245" xmlns:xlink="http://www.w3.org/1999/xlink" height="793" xmlns:ev="http://www.w3.org/2001/xml-events" viewBox="0 0 2245 794" id="page1" preserveAspectRadio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg"><style type="text/css"><![CDATA[
+.st1 {fill:#000000;font-family:宋体;font-size:10pt}
+.st2 {fill:#1f6391;font-family:宋体;font-size:10pt}
+.st3 {fill:#ff0000}
+]]></style><defs/><rect width="2245" fill="#ffffff" y="0" height="794" x="0" stroke="#808080"/><g transform="translate(80.25,203.42)" id="shape1"><path fill="none" d="M113,47L113,0L0,0L0,47L113,47z" stroke="#00b0f0"/><text class="st1"><tspan y="28.7" x="8">所有的java文件</tspan></text></g><g transform="translate(412.25,202.92)" id="shape2"><path fill="none" d="M113,47L113,0L0,0L0,47L113,47z" stroke="#00b0f0"/><text class="st1"><tspan y="28.7" x="32">dex文件</tspan></text></g><g transform="translate(193.25,188.42)" id="shape3"><path fill="none" d="M113,47L113,0L0,0L0,47L113,47z" stroke="#ffffff"/><text class="st1"><tspan y="28.7" x="18.4">遵循dex格式</tspan></text></g><g transform="translate(193.25,226.92)" id="shape4"><path fill="none" d="M0,0L187,0L214.6,-0.4" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M219,-0.5L213.8,-3.4C214.3,-2.5,214.6,-1.5,214.6,-0.4C214.6,.7,214.3,1.7,213.9,2.6L219,-0.5" stroke-width="1" stroke="#236ea1"/><rect width="27.8" fill="#ffffff" y="-7.6" height="15.2" x="98.7"/><text class="st2"><tspan y="5.2" x="98.6">合并</tspan></text></g><g transform="translate(684.75,203.42)" id="shape5"><path fill="none" d="M113,47L113,0L0,0L0,47L113,47z" stroke="#00b0f0"/><text class="st1"><tspan y="28.7" x="28.8">odex文件</tspan></text></g><g transform="translate(525.25,226.42)" id="shape6"><path fill="none" d="M0,0L127.5,0L155.1,.4" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M159.5,.5L154.4,-2.6C154.8,-1.7,155.1,-0.7,155.1,.4C155.1,1.5,154.8,2.5,154.3,3.4L159.5,.5" stroke-width="1" stroke="#236ea1"/><rect width="27.8" fill="#ffffff" y="-7.6" height="15.2" x="68.9"/><text class="st2"><tspan y="5.2" x="68.8">优化</tspan></text></g><g transform="translate(528.25,164.42)" id="shape7"><path fill="none" d="M195,43L195,0L0,0L0,43L195,43z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.4">pakageManager安装apk时，</tspan><tspan y="31.2" x="6.4">之后存放在/data/dalvik-</tspan><tspan y="46.4" x="6.4">cache目录</tspan></text></g><g transform="translate(307.25,108.92)" id="shape8"><path fill="none" d="M392,43L392,0L0,0L0,43L392,43z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.4">dex文件是遵从于dalvik虚拟机标准的文件，它具有跨dalvik</tspan><tspan y="31.2" x="6.4">虚拟机的特点，而odex是在特定dalvik虚拟机上优化得到的，</tspan><tspan y="46.4" x="6.4">通常不能跨dalvik虚拟机运行。</tspan></text></g><g transform="translate(912.25,203.42)" id="shape9"><path fill="none" d="M113,47L113,0L0,0L0,47L113,47z" stroke="#00b0f0"/><text class="st1"><tspan y="28.7" x="16">映射到内存中</tspan></text></g><g transform="translate(797.75,226.92)" id="shape10"><path fill="none" d="M0,0L110.1,0" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M114.5,0L109.3,-3C109.8,-2.1,110.1,-1.1,110.1,0C110.1,1.1,109.8,2.1,109.3,3L114.5,0" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(100,498)" id="shape11"><path fill="none" d="M113,47L113,0L0,0L0,47L113,47z" stroke="#00b0f0"/><text class="st1"><tspan y="28.7" x="29.6">关于加密</tspan></text></g><g transform="translate(351.5,441.5)" id="shape12"><path fill="none" d="M113,47L113,0L0,0L0,47L113,47z" stroke="#00b0f0"/><text class="st1"><tspan y="28.7" x="29.6">梆梆加固</tspan></text></g><g transform="translate(351.5,550.5)" id="shape13"><path fill="none" d="M113,47L113,0L0,0L0,47L113,47z" stroke="#00b0f0"/><text class="st1"><tspan y="21.1" x="12">爱加密，360加</tspan><tspan y="36.3" x="49.6">密</tspan></text></g><g transform="translate(213,521.5)" id="shape14"><path fill="none" d="M0,0L106.5,0L106.5,-56.5L134.1,-56.5" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M138.5,-56.5L133.3,-59.5C133.8,-58.6,134.1,-57.6,134.1,-56.5C134.1,-55.4,133.8,-54.4,133.3,-53.5L138.5,-56.5" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(319.5,521.5)" id="shape15"><path fill="none" d="M0,0L0,52.5L27.6,52.5" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M32,52.5L26.8,49.5C27.3,50.4,27.6,51.4,27.6,52.5C27.6,53.6,27.3,54.6,26.8,55.5L32,52.5" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(569,434)" id="shape16"><path fill="none" d="M193,62L193,0L0,0L0,62L193,62z" stroke="#00b0f0"/><text class="st1"><tspan y="13.4" x="17.6">将原始dex中的内容加密处</tspan><tspan y="28.6" x="17.6">理，在app运行时，解密出</tspan><tspan y="43.8" x="10.4">dex，mmap到内存，还原了内</tspan><tspan y="59" x="69.6">存结构。</tspan></text></g><g transform="translate(464.5,465)" id="shape17"><path fill="none" d="M0,0L100.1,0" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M104.5,0L99.3,-3C99.8,-2.1,100.1,-1.1,100.1,0C100.1,1.1,99.8,2.1,99.3,3L104.5,0" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(531.5,543)" id="shape18"><path fill="none" d="M268,62L268,0L0,0L0,62L268,62z" stroke="#00b0f0"/><text class="st1"><tspan y="13.4" x="8">方法体里面的字节码从dex中抠出来，</tspan><tspan class="st3">加密</tspan><tspan y="28.6" class="st3" x="7.2">到了自己的so中</tspan><tspan>，在app运行时，</tspan><tspan class="st3">从so中解</tspan><tspan y="43.8" class="st3" x="11.2">密出方法体</tspan><tspan>，</tspan><tspan class="st3">然后修改mmap对应的内存，</tspan><tspan y="59" class="st3" x="86.4">还原内存结构。</tspan></text></g><g transform="translate(464.5,574)" id="shape19"><path fill="none" d="M0,0L62.6,0" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M67,0L61.8,-3C62.3,-2.1,62.6,-1.1,62.6,0C62.6,1.1,62.3,2.1,61.8,3L67,0" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(71,598)" id="shape20"><path fill="none" d="M246,47L246,0L0,0L0,47L246,47z" stroke="#ffffff"/><text class="st1"><tspan y="13.5" x="10.4">原始dex做加固处理，在运行时还原内</tspan><tspan y="28.7" x="7.2">存结构。所以光从静态分析反编译加固</tspan><tspan y="43.9" x="16.8">后的dex文件，将得不到有用信息。</tspan></text></g><path fill="none" d="M0,0L9,0C11.5,-0.4,14,.5,15.8,2.2C17.5,4,18.4,6.5,18,9L18,29C17.6,31.5,18.5,34,20.2,35.8C22,37.5,24.5,38.4,27,38C24.5,37.6,22,38.5,20.2,40.2C18.5,42,17.6,44.5,18,47L18,67C18.4,69.5,17.5,72,15.8,73.8C14,75.5,11.5,76.4,9,76L0,76" transform="matrix(-1,0,0,1,1077.3,188.9)" stroke="#83b3e3" id="shape21"/><g transform="translate(1073.5,207.42)" id="shape22"><path fill="none" d="M111.5,43L111.5,0L0,0L0,43L111.5,43z" stroke="#3498db"/><text class="st1"><tspan y="16" x="6.7">ClassObject</tspan><tspan y="31.2" x="6.7">里面有两个集合</tspan></text></g><g transform="translate(1290,189)" id="shape23"><path fill="none" d="M111.5,27L111.5,0L0,0L0,27L111.5,27z" stroke="#3498db"/><text class="st1"><tspan y="16" x="6.7">directMethods</tspan></text></g><g transform="translate(1290,253.75)" id="shape24"><path fill="none" d="M111.5,21.5L111.5,0L0,0L0,21.5L111.5,21.5z" stroke="#3498db"/><text class="st1"><tspan y="16" x="6.7">nativeMethods</tspan></text></g><g transform="translate(1477.5,209.5)" id="shape25"><path fill="none" d="M217,41L217,0L0,0L0,41L217,41z" stroke="#3498db"/><text class="st1"><tspan y="16" x="6.4">const u2* insns; </tspan><tspan y="31.2" x="6.4">DalvikBridgeFunc nativeFunc;</tspan></text></g><g transform="translate(1185,228.92)" id="shape26"><path fill="none" d="M0,0L73,0L73,-26.4L100.6,-26.4" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M105,-26.4L99.8,-29.4C100.3,-28.5,100.6,-27.5,100.6,-26.4C100.6,-25.3,100.3,-24.3,99.8,-23.4L105,-26.4" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(1401.5,202.5)" id="shape27"><path fill="none" d="M0,0L44,0L44,27.5L71.6,27.5" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M76,27.5L70.8,24.5C71.3,25.4,71.6,26.4,71.6,27.5C71.6,28.6,71.3,29.6,70.8,30.5L76,27.5" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(1401.5,264.5)" id="shape28"><path fill="none" d="M0,0L44,0L44,-30.1" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M44,-34.5L41,-29.3C41.9,-29.8,42.9,-30.1,44,-30.1C45.1,-30.1,46.1,-29.8,47,-29.3L44,-34.5" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(1073.5,308)" id="shape29"><path fill="none" d="M493,56L493,0L0,0L0,56L493,56z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.4">虚拟机在处理native方法时：System.loadLibrary对so进行加载，其最终是使</tspan><tspan y="31.2" x="6.4">用dlopen函数加载了指定的so文件。再从之前dlopen获得的句柄中使用dlsys去</tspan><tspan y="46.4" x="6.4">查找对应的函数，</tspan><tspan class="st3">得到了函数指针后，将这个指针赋值给 insns。在</tspan><tspan y="61.6" class="st3" x="6.4">nativeFunc这个桥接函数中，将insns解析为函数指针，然后进行调用。</tspan></text></g><path fill="none" d="M0,0L9,0C11.5,-0.4,14,.5,15.8,2.2C17.5,4,18.4,6.5,18,9L18,29C17.6,31.5,18.5,34,20.2,35.8C22,37.5,24.5,38.4,27,38C24.5,37.6,22,38.5,20.2,40.2C18.5,42,17.6,44.5,18,47L18,67C18.4,69.5,17.5,72,15.8,73.8C14,75.5,11.5,76.4,9,76L0,76" transform="matrix(-1,0,0,1,979,536)" stroke="#83b3e3" id="shape30"/><g transform="translate(1000.5,536)" id="shape31"><path fill="none" d="M224.5,86.3L224.5,0L0,0L0,86.3L224.5,86.3z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.7">基于xposed的zjdroid脱壳工具，</tspan><tspan y="31.2" x="6.7">可以在运行时</tspan><tspan class="st3">dump出内存（odex结</tspan><tspan y="46.4" class="st3" x="6.7">构的内存），保存为本地odex文</tspan><tspan y="61.6" class="st3" x="6.7">件，再利用smali/baksmali还原出</tspan><tspan y="76.8" class="st3" x="6.7">原始dex文件。</tspan></text></g><g transform="translate(872.5,560.75)" id="shape32"><path fill="none" d="M73.5,26.5L73.5,0L0,0L0,26.5L73.5,26.5z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.7">破解方法</tspan></text></g><g transform="translate(1082.5,109)" id="shape33"><path fill="none" d="M475,66L475,0L0,0L0,66L475,66z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.4">虚拟机在处理native方法时：insns存放了该方法的字节码指针（指向code区</tspan><tspan y="31.2" x="6.4">域的开始处的指针）</tspan><tspan y="46.4" x="6.4">虚拟机在调用directMethod时，在构建好方法栈以后，pc指针指向了</tspan><tspan y="61.6" x="6.4">insns，于是可以从内存中取得字节码，然后解释执行。</tspan></text></g><g transform="translate(1258,228.92)" id="shape34"><path fill="none" d="M0,0L0,35.6L27.6,35.6" stroke="#236ea1"/><path stroke-linecap="round" fill="#236ea1" d="M32,35.6L26.8,32.6C27.3,33.5,27.6,34.5,27.6,35.6C27.6,36.7,27.3,37.7,26.8,38.6L32,35.6" stroke-width="1" stroke="#236ea1"/></g><g transform="translate(1737.75,216.63)" id="shape35"><path fill="none" d="M76.5,26.8L76.5,0L0,0L0,26.8L76.5,26.8z" stroke="#0070c0"/><text class="st1"><tspan y="16" x="6.7">hook原理</tspan></text></g><g transform="translate(1857.5,176.13)" id="shape36"><path fill="none" d="M298.5,130.9L298.5,0L0,0L0,130.9L298.5,130.9z" stroke="#0070c0"/><text class="st1"><tspan y="16" x="6.7">Xposed在对java方法进行hook时，</tspan><tspan class="st3">先将虚拟机</tspan><tspan y="31.2" class="st3" x="6.7">里面这个方法的Method改为nativeMethod</tspan><tspan>(其</tspan><tspan y="46.4" x="6.7">实就是一个标识字段)，</tspan><tspan class="st3">然后将该方法的</tspan><tspan y="61.6" class="st3" x="6.7">nativeFunc指向自己实现的一个native方法</tspan><tspan>，</tspan><tspan y="76.8" class="st3" x="6.7">这样方法在调用时，就会调用到这个native方</tspan><tspan y="92" class="st3" x="6.7">法，接管了控制权。这个java方法里面对原方</tspan><tspan y="107.2" class="st3" x="6.7">法进行了调用，并在调用前后插入了钩子，于</tspan><tspan y="122.4" class="st3" x="6.7">是就hook住了这个方法。</tspan></text></g></svg></div>
+        <div id="copyright">Powered by <a href="https://www.edrawsoft.com/" target="_blank" title="edrawsoft">Edraw Max</a></div>
+      </div>
+      <div id="navBar">
+        <div id="nav-thumbs">
+          <div class="nav-thumb">
+            <div>
+              <span class="number">
+                <span class="pagenum">1</span>
+              </span>
+              <a href="#page1">
+                <img src="data:image/png;base64,/9j/4AAQSkZJRgABAQEAeAB4AAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAA1AJYDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD+/iivIPjd8efhV+zn4Jk+Inxh8S3PhbwjHePp51Gz8M+LPF1211FpGra/cJFofgrQvEevTx2mh6DrOr3txDpklvY6dpl5eXcsMELOPkn/AIet/sL3XgT4gfETQfi/f+I/D/w00GDXvEhsvhx8S9GncXd/pWm2Og6RN4x8JeGNK1fxjfXWtae1p4Ns9SfxLNZyT6l/Zg06yvbu376WVZnXw08ZQy/G18NThKrOtQw9StFU4VHRlOMKTqV6kY1oypP2GExLdSFSEYzlTqql5FfP8jwuNeXYnN8uw+OUqUJYWtiY0qsJ18PLF0Y1ZTorD0JVcLCeJprE47COVCPtlam4SqfoTqGoWGk2VzqWqX1npunWUL3F5f6hcw2dlaQIMvPc3Vy8cEEKDl5JZERRyWFcLp3xh+EmsWN7qmk/FL4c6ppmmtImo6jp3jfwze2Ng8Lxxyre3dtqctvatFJNDHIs8kZR5Y0YBnUH8pfiv+0T/wAE2P8AgqB8BNU+H3jv9oG++Gnw70zxd4K8Uf8ACQ6z4y8PfAvxJbeItNivNR0uL/i4MdxLY29u8ktleR+I/D9raXepPbR6JcXWo20M9v8AC+of8E3v+CJfhKOZtQ/aY8c/FHQ7fTdL8R+I/CvgT4h+GPjBpMNnb614WMvizxro/wACfhRrep6HaeM9V1Xw3o82pa1JpOj65ca3ZaX4ZWC+nsUhunkXEM61anLI8xjGMW6U5YPHUlanCnOtLEzxGDwuHoRpydSjy1MZQak8PVnUVOvClVjFcTcMYPDRxNbiLJIRUlCrzZrgGoTq1fY4aMFQxOOrVvau81HDYPFVJ+zq0oRjOnKrT/o8f41fBuOO4mk+LXwySG0t4ru6lfx54WWO2tJ0uJYLm4dtVCw280drdSRTSFY5Etrh0ZlhkK6/h34lfDrxfY2uqeEvH3grxRpt9MlvZaj4d8VaFrdjeXEjwRRwWt3pl/c29xM8l1axpFDI7s9zAgUtNGG/mO/ag+EX7D/w98FfDLxT+wj8K/2VY/GTaFr76Zo37aHxD+MXwf0/WPDr39jpuhavYW/xz/ao/Z58Z6rpdnJd+N7fw94ms/A3xQ0qz1nRNS0HS/EHgPU9LmF32n7Gv7KXwK+HHxT+Bdjrj/8ABJf4aReFPH3hDxzd+BPg18e/jp4t+ND/AB2vrGK88MWXh7TPEf7Q1z4atb5Naht9N0LwNqx+K2iBrQ6v4fk1Vre1tJajkubU6lVYzKM5wlHDySxFWrleMgoUoRrYiviqc3h62HrYNYOnCpRxdPFSwzxEpUK+JoRhPEUrpcQZFiMPCvhs6yfFKpGMacqOa5cqcq86tTDQozVbHYbE0MQsVTcamCxGDoYyNBuvCjVXsliv6cqK+ONO/wCCgX7Hmo6jq9i3xu0PRbDQte/4RfU/Gfi7QfGfgj4XQ+IHg125tdJh+LvjHw3oXwuvbzUovDHiI6PHY+L7ka0+i6lDpJvZrSVFj8Yf8FD/ANh3wTosuu6j+1J8HNftYZNkth8NvF9j8XvEiRrBPdT3p8IfCk+M/Ff9l2VtbT3OpauNFOl6XbxmbUby1iZWbX/V3P8A9w1kmbSjiaSr4epDL8VUo1qD9p++hiaNOvhHTXsqvNOWNpKDpzVRUmrPmXFnC7jiZf6xZIvqdf6ri4TzLDUq2HxN4RWHq4Wv9WxyrSlVpxhThltedRziqKrttR+y64Wf4o/DO18Tr4JufiL4Et/GbzW1snhGfxd4fh8TvcXjiO0gXQJNQXVWmunZUtohaF53YLErEgV8s+AP+CjH7I3xXs9ZvPhr8RNe8WjQ/tEF0q/Cz4r+GLeXVYvCuseNbfw7BrPjrwV4V8OjxHqvhfw/rOsaLotzrNte6vaabeS2Mcy28xT+WL4n/Bj/AIJg/tSftYfF79qGT9vz4u+E73xr47sfEGv+Gda/YZ+Nl58NvCWoXuv6dqOk+GfG3xFi8MQeCPE+iW+rw6a76x4j1yXw1q+j6rpdnpeszaaEaHGeR55Rr4OFbJ8wjRxlOtOlL2MY1cQ4VKFCjSwUJ1vZ4idfEVvq8WqqpxxCp4eo6davThU0w/E3DmNo42pg8+ynESy6pCONjHF2jhYeyq1a31qUsPSnhKlKkqNZKvhlGVCVStd0oOrD+1Wz8ceC9Ru77T9P8X+F76/0uzl1HU7Kz8QaTdXenafbrA099fW0F281pZwrdWrS3NwkcMa3MBd1E0Zbi5P2gPgNFpcmuS/G34Rx6LEMy6xJ8SfBqaXGPtH2TMmoNrQtEH2r/RstMB9o/c/6z5a/nJ+JXwC8Pat4V1DTfhp/wUe0L9pj4sWWj6LceDNB/ZC/YD/ZO+LfxH0fwZ4E+waM+h6nb/AWPwvpmheHreDVtC0/wtqfxP8AHvgbwvo9zaRWOhXd5eyNp7Wv2dPgv4A0y88PWXxn/Zr/AOCmz6xpfh3xZ4U1rx7r/wCwt+zLpfwq1LT/ABhFZWur6/d/DLwVa/tCePrjVVt0tr+4EEevm71nRptS0/w8txNYWN1vQ4X4oxNKrUoZJiV7KnOUvrcsNlspOFDGV+eNDM8xy3Fqg1Sw1Hm+rTqTqyxEsNDGU40oPLEcXcMYWdOjVznC1Ks/Y3+qfWMdQUquKw2H5Y4vLsuzXDynBV5VJ03X9rCNLmqww0akZR/pIPxZ+FY0afxEfiX8Px4ftdEsvE1zrp8ZeHP7Gt/DepPDHp3iCfVP7S+xQ6JqD3Fullqsk62F088KwXEhlQN6BX8/Phjw/wD8Ekvhb4gsJ/EXxpvfHupaF4JfwFffDb4k/ATwT4n1Pwb4d8E22o+Hbbwl4p+HOlfsq6b4x+EOueEb7wlrmt6b4YvtO8DeItPSC4kj0xvBA0vTIf1O8Fftlfs/eI/DOk6j4R1z4u+NNDW4i8M23iOw/Z5/aO19dR1uwjW1n0661Sy+E0kNx4j8yNv7RsSU1Bbsyia1jk3IGuG+IOVylkuZQv8AvIxlhuRww9StiqVB1HWxGHbnONKhNVY04Yaq604YeVZ0nUnpHiTJPZ0p1M3y334XnKlXrVaUaqcYyp061PAVqVaKnGvBzhVbhUpSo1Y060K1Gj9cUV8ffFX9vX9lj4J+FPB/jP4l/ELXvD+jePH8fReGLa2+Evxl8R+KLyf4Xa3aeGfiDa33gfwv8Pta8a6FeeFPEd/ZaBq1nr/h/TLqLWbu20yOGS9mjgb5E/aj/wCCsnhb4V/C79nv4s/s6eAdF/aG8FftEWHxG1XQ/Fnibxr4s+Cej+GNH+Hfi/wH8O9T1XVtH1j4SeKvGlzNaeNfH9jZav4fvPDfh3VbDT9E12eNri+istOu+PG5XmWXYHF5lj8DisFgMBSxFbGYzF01h8Nh4YWU6db2tarVjCnJVac6MI1PZe1rQnTpTquFSdP2cir4fibO8n4c4fxGHzfPM/x+ByzJ8swFX6xi8wx2Y8v1OhhqVKjOVWVVTpybpqv7KNah7enRlXoU6v6+UV/NH4f/AOC0/wC2f4rg1GHRf2LPghBqPhlbaz1OHXP2iPG2l6h4w1SN7TU9Rm8I+GP+FJXGq6TpyaFJKCNduruTTftNpr19cSQiHQNR6i//AOCzP7UMNp4HdP2Ufgjpmq+NfFuj+EbTRvEfx+8faJEh1fxSnh1vED6/rfwJ0XT7fT9MEd5PeadLA+pSmG3ghxf6hYadcfJ1OJ+HIVKVFZ7lNWvXngYYejSx9Bzr/wBo4ihhcHUpSqxw2HdOeJxNChVlPGU3g6tSNPHQws1KNP8Ac8v+jf445jRxOJh4bcSYbC4SjmdetiMZhadNcuU4N4/Exo4TDYrMs3xVSvhIVquXLB5BioZmsNi44KtKWGqn9GlFeafBb4hP8XPg58JvitJpEnh+T4nfDPwJ8Qn0CW4W7l0R/GnhbSvEjaRJdIqJcyaadSNk9wiIszQmRVUMACvosRQq4WvXwuIg6eIwtevhq9NuMnTr4atWw9em5QlOEnTrYetTcoTnBuDcJzg4zl+HQnCrCFWlONSlUhCpSqQ5uSpTqQjUp1Ic9OlPlqU6lOpHnpUp8s489KlPnp09Hx78N/CnxKsdHsPFUGtkeH9bXxHoWoeGvF/i/wAC6/o2tjR9Y8Ptf6Z4m8Da74c8RWMk+h+INb0i6jttUjgvNO1S9tLqKaCZkPOeF/gj4K8I67Y+ItM1T4q3+o6b9pNnF4u+PPxy8faPG93Z3FhNM/hzx18RfEfh24uBa3VxHBcXGlyz2jSma1khmCyD12iu6lnWb0ME8uo5ljKeAlGvB4ONWP1flxL5sTFQnh6soRryvKrGlWoqcm5NKcpTl4uI4Y4dxeZxzrE5JltfN4TwtSOZVMPP657TAx5MFOVWnjaEKk8JBKGHnXwuJlSgo04ydOEKdMrzXx38JfBfxHv9C1bxGviu11jw1Z63p2jaz4M+IvxE+G2s2um+I5tEudd0yXV/hz4p8K6lfaZqd14a0C6utNv7q6sWu9H0+6ECz20cgg+Mfxm+G/wE8A638Sfin4r0Twn4Z0a1vJI5dY1jR9Iude1S302/1O08L+Gk1rUNMt9Z8Wa3Fp11BoHh+2uft2rXaCC2RjuZfjPXP+Cmnwe8MfFX4gfBLxD8Nfi9pXxP+FXhCTx98RvCj3nwJvr7wj4Mh8LS+Np/EGotpPxx1CC5tYfCkE2sta6VLqGpywRm2t7Ga/aO0f0MhyniXE1sPi8gp1qeJrVsRgcFVpY/LMvxGLr/AFek8ZhMBDMcywE8wnHDYvDrGUcHh8xjTp4rDwxcaTr0IS8fizPuCsJhsXlvF1XDVsHQwdDOMxw2IynO83wuBwNDF1fqmZ5nLJslzSnlVGGMwWIng8VjsXlc3UwmIrYSdSGHr1o/afgT4S+C/hxf67q3hxfFd1rHiWz0TTtZ1nxn8RfiJ8SdZutN8OTa3c6FpkWr/EbxT4q1Kx0zTLrxLr91a6bYXVrYrd6xqF0YGnuZJDv+NfBXhz4h+HLvwp4rtLy80a8vNG1F007Wtb8Oalbal4c1vTvEmg6npmveG9R0jXtH1PR9e0jTNW03UtJ1OyvrS+soJ4J0ZOfkj4qf8FEf2TvAPw+8T+LPB/xw+DHxp8W6VZRL4W+FPwz+N/wi1Pxv488R6jeW2l6J4d0OC58ZQWdsb3U721GoavfzRadoWlLfa3qLrY6fcGvyqT/g4r8BXPhbw3r2mfsLftY6xf60/hXRrvStJvPg5qSx+MfEguJ30TQmsPiHda5rej2ljaXc0Pia88N6BBLc28lnqmn6H5c1xFjiv9Y4Y2jmuPlmeHzFSoVMNjcwlPAYxzw01hMM8LLGwy6rJ4eooYajHD4VQg5wpUqc1UnA6MIuDFl+J4by6jk+IyqUalDF5RleFnmeXzWbxxGNrUcVHLoZxhp1cwp0cVja9PEZjPF1qeHrYutyRo066/c7QPgD8OvD3iPQfFcE3xK1rWfC95e6j4efxv8AG/42fEXTdI1LUNE1bw3danZaD4/+IXiXQYtTfQdd1rSY9SGmG+t7LVb+C2niW6m3df49+G/hT4lWOj2HiqDWyPD+tr4j0LUPDXi/xf4F1/RtbGj6x4fa/wBM8TeBtd8OeIrGSfQ/EGt6RdR22qRwXmnape2l1FNBMyH5U/Yb/bf0X9tjwZrniey+F/i34S6nodt4Z1aXw14t1zwjr19N4f8AGA12LQtQnbwtq9/daBqjX/hbxFY6p4T8W6b4f8UaObG0u7zS1tNVsZn+5aeYY/iLDZjhcTj8fjo5lhcNh62BxLxVOdSlg8dRqYrD1MJWw8Pq6w2LoYuvWTpU5U68cRWdWNV1KkWsoyjgvG5LjsHk+VZPVyLMcZiaWZYSlga9PDYvH5dWw2DxMMdQxzp4yWLwVfAYOh/tE6NbDTwmFWHlQVGhUPn9v2ZfhVJNDdXzfEzX57GHWV0z/hM/jj8bPiHZ6Rda54c1nwnf6tpeiePviB4o0K11xfD/AIh1rTbPV00ptQsYNSu1s54jPJu/nt1z/gp1+yV4bvNU+Dlv+zD+2p408P8Ahy71f4eah4T0b9ov4wLod54K0PV/DfgXJ8EX/wAUvDvw7j8N6xp/ibTng8C79O0xNAF9oJ0e1mto/D7/ANSVeUw/Aj4H21nqGnW/wa+FNvp+r6hZ6tqtjD8O/CEVnqeqafJ51hqWoWsejrBe6hYzAS2d5cpLcW0g3wyI3NcWM4o44lOm8DxFWjCFNtRxtXEzVHFQqqWGxFGGFw9GKVKFTEuUKf1Kq63sasMUqjq1qf0/DXBnhLhHVjxDwrjVQnjMHOdLhihkdCpjcDUlGjnWHxuIz7FYuft62BpUIZbUazHDU60FTx2DlgKaw2I/Av4rf8FMPgR+0ja6b4wvfA37fXwd8QeFvDHxH+Hduf2dNV+FmlfFG/8ACPxE8QfC/Udd0jUnvry68Y+E7m51v4a6BqUWpfDy90rxvpZ8G+I7Gwv9S02+u7LUfnfR/wBqv4IfDTUxqfwm8ef8FuvHXjjRLa8kvvAd58dtC+KCeEtRS5trDwlZal4B8c33xJ+H13pNzqNrZ2euy2mgeIfDfhxTe2os/EonvNPvf6dtK+AHwH0HUBq2h/BP4R6NqgiNuNS0r4b+DdO1AQNbX1m0IvLPRobgRG01TUrUx+ZsNtqN9AV8q7uFk3PCXwl+FfgHUb7WPAnwz+H3grVtThkt9S1Twl4M8OeHNR1C3lmhuZYL6+0fTbO5u4Zbi3gnkiuJZEeaCGVlLxoy+dlHEXH+XfVMLPMuHFllOnWoYmlQyeWIxk6M6Ps19WxWb5bmEqU60qmKWIVSr9XhDF1PqlCjUhGUv0LPck+jZmKzPE4XhPxknmdXBUpZZiMdxvwnhaDziNfCS+s5th8ipYChUweHo4WCw8MDgvreIrxoSx1SVKlKnV/lkv8A9pz4HeLbo6P42/4JjftKfGnxFosniSey+InjD4r23hjx58Rr7x/8W/iR8XfFkF/oHwh0LwX4fi1DRPiV4z8ca7qGhp4Z0e18FQT6nBHY6WujXNlD+23gP/gnT+xJ48+G3gbxBqP7Omo+G4PFXhHRvE83gnV/il8XLqXwzc+LtG0bVdV0K+ih+IH2F761lgsdP1aW3iWK8uNItnYOltb+X+ktFenheIuKKVOUcTndarUl7Dlq4aLwrj7N1alSmqcqFamqE8RKliKNGKSwlTDwVDli/wB3+fZnw/wFU9lLJeGcVgpqVR13meY4bMISjL2XJGgsDRyypCUfZR9rWxNfE1sS71K0pVbVI+B6j+yz+zlr/hLw34G8Y/BX4dfEfwx4Qv8AxHqvhuw+LHhnT/i1caVq3jDV7nX/ABXq8Or/ABLi8VazJq3iTWbu41HW9UuNQmv9TuXD3lxN5cYT4P8A23v2MofiBqP7PPhz4afBrxiPgv8AD3wN8Z/Cer+Ef2aLf4AeCtY8LXHjP4j/ALOfjnR4NB8P/Frx98KvAWm6RrNv8NPG8V9qOljxBcadrN5YTXfhTVLPU76SP9bKKdTN8VjaOJwOdVMTn+U42lmFLG5PmeaZz/Z+I/tONNYut7PC5nReGxVSpSpVni8HSw2IlUjLnqTp1a0Jxk1GfC2cZJxLwdUw/CPFHDeY5LmmQcR5Lk/D/wDaeV4zh+tOtlLpPH5Ni6GJw+E9pKFLBY9YzBwgqThhozw9Bw/CG5/YW+EGo3sWp6x+wV+3Tq+pR6nr2sNe3Pxe/Ygs3uNR1pbRrea5t9G/as0uxni8OXtvPqfhuye0Nhp9/qWoST2t5A9vb22xoH7Gnw00jUvB+sar+wh+3D401TwTNrM+kX/i34m/sG3F1cza1a2Fm76zNo37UGiSauNNi021Oix3jSQ6XMrTW8YkbcP3GorwqXD/AIeUKkK1Lw04ZhVpzpVIVFmPFMpQqUJqdKpFzzOpy1ac4xkqq/eOUU5Tm1r+p1vHv6Steg8NW+kZ4oToexq4eNPm4XgqWHxGHr4Wvh8POlklGrhaFfDYitQrUcLWw1KrSmo1KcvZUJYfwn9lvwR4n+Gf7Mv7Onw38bWyWXjL4f8AwJ+EXgjxbZx3tvqUdp4n8KfD/wAPaDr1tHqNpLPa36QarYXcS3ttPNb3SoJ4ZZI5Fcle7UV6ePxlXMMdjswrxpxr5hjcbj60aUXClGtjsZi8dWjSg3JwpRrY2rGlFyk40404uUnFyl+VYDB08vwGBy+jKrOjl+BwWAozrT9pWnRwODwmBpTrVLL2ladLBUp1qllz1Z1Z2XPZeYfGaeU/DHxto2neOdG+HPifxd4Z1/wb4G8W63rcegW+leO/E2i6hpnhK4tb8utyNRt9Zmtruzh05J9Tke2JsbeadFQ/lDoHgj9oC2+Kni7WtP8A2tfgboOlPq/g7W/Anhm+/bP/AGhPjDafCrS/C3ibR9d8Zv4v8EeJtV8LRfGzTPEnhrTdT8Oaho2ueI/hzZ6faa1e6jBrFneW2n3Fj+oP7RP7Pnww/ak+D/jL4H/GDRH1vwR41sFtb0WsyWmr6Rf20qXWleIfD2ovDcDTde0S/ihvtOu2t7m3MkbWuoWd/plze2Fz+UniX/g30/YM8SnRSb/44+HhomkTaVHb+D/GvhHwtpeoSXun3Vjq2p6toGkfDu28PXtzq819e6lc6cdJj8N2d1dTWmjaFpeiN/ZI9XJOLM3yCjjcLg8FlVejWlVrUamNw6xTnVr5TVwNSniKU6lKnVownGEadDEQxWHhLESxdGnRrrFur8txR4f5Bxdi8BmGY4/PsLi8HQp4aEctzGWCw8aeGzajm9CpF08PWxNCvUrqVOti8uq4PG1cPShg69eWFWFlhvSP2gvHGs+d8H/Ffxu+MHwU/aN+C/gXx38RNZ+KHg79mf4F+PrbxtpHhXxL+yL+0x4MfX9cOj/tH/HK/fwbexeLU8PajMvhzw5ZaVL4k03xdrHjrw54Z8P6zNc8brH7RHwRlk8U+F/Hn7Iv/BVLT9F0zQ/FN748t/Hfjz4sX/he28AaLFqFt4l8ReKdIuv2t9Wj1T4d39lZarBFfS6Rqei+LrW3v9P0qLWXW4s692/Y4/4JFfsbfsSeIPFniz4Y+HvGPjTxR4t0LUvCdxrfxh8TxeO59I8Ha2sX9veE9GsRpOkaMmja48WdSbUtM1PVJbWWfSYtSh0OeXTH+w4v2WP2YreWKeD9nL4DwzwyJLDNF8Ifh9HLFLGweOWKRPDyvHJG6h0dCGVgGUggGvqsi4xy7L8PgaWOed0XhcU69Wlw5VoZThqtGeIVdRox+s01g80pKPs1m1CnVVTnoS9hF5dS9t8Vxh4dZ1nmOx+JyyPCeIhi8qWCoz4xwmKzzGUMV9XlSm8RWjgqrzPIqkqrbyLESw0U6WKftpLOMR9X/P39sv8Ab/8ADmiaV4S+HXgr9mX4zfHC58bQa14u1LQ/F+j/ALQn7HWr6JbfCvxL8PNX0rxB4O8TePvg3oOt6/rGk+KNc0DVVuPBWoWd74XuNNsbm8vobjVdHt738vG/4KTWl/4j0uXxJ+wv8Y7nxPp+heKdR+Hw07/gpv8AtH+K/GNzrVusltfeFNAtW0S01DStd8VwWELaTY2N0994pshbJYWV/crFZH+oPxv8Lvhn8TYtOg+JHw78C/EGDSJLmXSYfG/hHw/4ri0uW8WFLuXTo9e0+/Sykukt7dLl7YRNOsEKylhEgXzBv2Qf2TGvIdRb9l79nZtQtp0ube+b4J/DU3lvcxrGiXEN0fDPnxTokUSJLG6yKscahgEUD5yhxJj8rhhKeR4z6rg44mFXF5PmWWLM8PH2ka9PGYzB5tRz3LsW8dUj9Qr4enXybC4elWwEaNWviaNWWIpfp1Hg/gDPI5u/EDhnPc0zivgcXRyni/hXjXBZHiqfsqEJ5Lk2Y8HZz4e51kzyejjZYynmOPocY5nm1TB5jiq2Ay7D4n2WCj+cP7DX7Zy/EP4k+BdHP7M3i34dXXx2bW/DGreN/Ff7THxQ/aA1TR5fhX4R8W/EDw/4bu9V+IvhHylsri31PxPc6TpuieKbezgutR167ltJb+3vrcfph8RPj3p3w6+JXw3+Gdx8Lfjv4wuviRcLBF4z+Hfwj8U+Mvhr4IV9RtdMjuPiR440uBtH8IW7S3X2pmvHlkh063utRuYobSHzW3vCnwD+BXgTW7bxL4H+C3wm8G+I7OO4itNf8KfDnwf4d1u1ivIHtbuK21XSNGs76CO6tpZLe4SKdVngkeKUNG7KfWa8/OcwlmeOp42piq+NqyUPrdWvgKGWurTpQhRoYWhQw+c54qFGhRpxjGs8XOo1OpThhMPTjTb7sBgcoyzAQy3IeHKXC2X4alXp4XCR4nx3F1arisRiKuLxOb47MMbwlwTTni8TXrzVXAYTJ6eBUaFCtLH4rE1MRJfk3+03/wAFFfiT8CvG/wAGdD8K/A7wZ420j4rfDzTPFrL4p+LV38Nzo2teJdfu9F8N6VqXjG78Ca/4W0iyKxW8ur3N1FdXdtfyS6Xb2cxEF5P86ap/wVq+PM9rOLP9nrwd4JvtCuU0zxBD4o1fx34umudX1CbXrHSrHS4PDfhzRNL064/tLRbiC7g1zxLFHPBZXL6XeXt5JPYaX+28nwz+Hs9vZ2174K8ManFp+mDRbE6zothrU1poq3sOoxaNb3OqwXlzFpFve21rPaaYsosbRrSzFtBElnbLF3FfEZhgeIsRicxeAz7CZdgquMxtTLaX9jRxuIoYOvObwlDE4jEY2jKUsHTqNL2EX7SdOg6leVOlUp4n9j4b4g8HMsyTLaPEXhlxZxTxBLKsHhs+x68TZcO5Y81w+JhUxOY5Dgsr4Tx1fCUswwkI4SthMzrYyOGqSxGNwU4VcV7HB+L/ALOvxB8T/FX4I/Db4ieNNP8AD+k+K/FnhyDVde0vwtd3F7oOn6g89xDNaWM93LPdqbfyRHdWt3NJdWF6tzY3DGa3evaKKK9+CkoQU5Kc1CCnOMVCM5qEFOcYJtQU5qc1BNqCmoJtRu/zLHVMHWxuMq5fhKmAwFXF4mpgcDWxdTH1cFg6letPC4SrjqtOlVxtTC4edHDzxdWlTqYmVF4ipThOtOESiiiqOUKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9k="/>
+              </a>
+            </div>
+            <p>页-1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        const svgs=document.getElementById("svg-container").children;
+        const UA=window.navigator.userAgent;
+        const ua=(UA.indexOf('rv:11')+UA.indexOf('Firefox'))>=0;
+        const svgcount=document.getElementById('svg-container').childElementCount;
+        var styleArr=[];
+        var heightArr=[];
+        var navBar=document.getElementById('navBar');
+        var conInfo=document.getElementById('content-info');
+        for(var i=0;i<svgcount;i++){
+            styleArr[i] = {width:svgs[i].getAttribute('width'),height:svgs[i].getAttribute('height')}
+        }
+        window.onresize=function () {
+            renavstyle();
+            resvgstyle();
+        };
+        window.onscroll=renavstyle;
+        window.onload=function () {
+            renavstyle();
+            var sideWidth=navBar.offsetWidth;
+            document.getElementById('content-info').style.marginRight=sideWidth+'px';
+            document.getElementById('main-content').style.marginRight=sideWidth+'px';
+            resvgstyle();
+            doscroll();
+        };
+        function recontainstyle() {
+            var topHeight=conInfo.clientHeight;
+            var svgHeight=0;
+            for(var i=0;i<svgcount;i++){
+                heightArr[i]=svgs[i].getBoundingClientRect().height+10;
+                svgHeight+=svgs[i].clientHeight ||svgs[i].getBoundingClientRect().height;
+            }
+            var fullHeight=svgHeight+Number(topHeight);
+            if(fullHeight<window.innerHeight){
+            document.getElementById('copyright').style.position='absolute';
+            document.getElementById('copyright').style.transform ='translateX(-50%)';
+            document.getElementById('main-content').style.position='absolute';
+            document.getElementById('main-content').style.top=topHeight+'px';
+        }else{
+            document.getElementById('copyright').style.position='';
+            document.getElementById('copyright').style.transform ='';
+            document.getElementById('main-content').style.position='';
+        }
+        }
+        function resvgstyle() {
+            var sideWidth=navBar.offsetWidth+20;
+            for(var i=0;i<svgcount;i++){
+                var oriWidth = styleArr[i].width;
+                var oriHeight = styleArr[i].height;
+                var percent = oriHeight / oriWidth;
+                var innerWidth=document.body.offsetWidth-sideWidth;
+                if (innerWidth <= oriWidth) {
+                    svgs[i].removeAttribute('width');
+                    svgs[i].removeAttribute('height');
+                    if (ua) {
+                        svgs[i].setAttribute('height',innerWidth*percent);
+                    }
+                }else {
+                    svgs[i].setAttribute('width', oriWidth);
+                    svgs[i].setAttribute('height', oriHeight);
+                }
+            }
+            recontainstyle();
+        }
+        function renavstyle() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            if(scrollTop>topHeight){
+                document.getElementById('navBar').style.top=0+'px';
+            }else{
+                document.getElementById('navBar').style.top=topHeight-scrollTop+'px';
+            }
+            doscroll();
+        }
+        function doscroll() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            for(var i=0;i<svgcount;i++){
+                var sum=0;
+                for(var j=0;j<=i;j++){
+                    sum+=heightArr[j];
+                }
+                if(scrollTop+window.innerHeight/2-topHeight-sum<0){
+                    var sub=Number(i)+1;
+                    if(document.querySelector('#nav-thumbs .selected')){
+                        document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                    }
+                    document.querySelector('.nav-thumb:nth-of-type('+sub+')').classList.add('selected');
+                    break;
+                }
+            }
+        }
+        var navs=document.querySelectorAll('.nav-thumb');
+        for(i=0;i<navs.length;i++){
+            navs[i].children[0].onclick=function () {
+                document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                this.parentNode.classList.add('selected');
+            }
+        }
+</script>
+  </body>
+</html>

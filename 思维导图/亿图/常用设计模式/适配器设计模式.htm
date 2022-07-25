@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<!-- saved from url=(0016)http://localhost -->
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>适配器设计模式</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #content-info{
+            width: auto;
+            margin: 0 auto;
+            text-align: center;
+        }
+        #author-info{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        #title{
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            padding-top: 10px;
+            margin-bottom: 2px;
+            font-size: 34px;
+            color: #505050;
+        }
+        .text{
+            white-space:nowrap;
+            text-overflow: ellipsis;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 2px;
+            font-size: 20px;
+            color: #8c8c8c;
+        }
+        #navBar{
+            position: fixed;
+            right:0;
+            bottom: 0;
+            background-color: #f0f3f4;
+            overflow-y: auto;
+            text-align: center;
+        }
+        #svg-container{
+            width: 100%;
+            min-width: 0;
+            margin: 0 10px;
+        }
+        #nav-thumbs{
+            padding: 0 5px;
+        }
+        .nav-thumb{
+            position: relative;
+            margin: 10px auto;
+        }
+        .nav-thumb >p{
+            text-align: center;
+            font-size: 12px;
+            margin: 4px 0 0 0;
+        }
+        .nav-thumb >div{
+            position: relative;
+            display: inline-block;
+            border: 1px solid #c6cfd5;
+        }
+        .nav-thumb img{
+            display: block;
+        }
+        .nav-thumb span{
+            pointer-events: none;
+        }
+        #main-content{
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #d0cfd8;
+            display: flex;
+            height: auto;
+            flex-flow: row wrap;
+            text-align:center;
+        }
+        #svg-container >svg{
+            display: block;
+            margin:10px auto;
+            margin-bottom: 0;
+        }
+        #copyright{
+            bottom: 0;
+            left: 50%;
+            margin: 5px auto;
+            font-size: 16px;
+            color: #515151;
+        }
+        #copyright >a{
+            text-decoration: none;
+            color: #77C;
+        }
+        .number{
+            position: absolute;
+            top:0;
+            left:0;
+            border-top:22px solid #76838f;
+            border-right: 22px solid transparent;
+        }
+        .pagenum{
+            font-size: 12px;
+            color: #fff;
+            position: absolute;
+            top: -23px;
+            left: 2px;
+        }
+        #navBar::-webkit-scrollbar{
+            width: 8px;
+            background-color: #f5f5f5;
+        }
+        #navBar::-webkit-scrollbar-track{
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        #navBar::-webkit-scrollbar-thumb{
+            border-radius: 8px;
+            -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.3);
+            background-color: #6b6b70;
+        }
+        #navBar::-webkit-scrollbar-thumb:hover{
+            background-color: #4a4a4f;
+        }
+        .nav-thumb >div:hover{
+            box-shadow:1px 1px 4px rgba(0,0,0,.4);
+        }
+        .selected .number{
+            border-color: #08a1ef transparent;
+        }
+</style>
+  </head>
+  <body>
+    <div id="main-area">
+      <div id="content-info">
+        <div id="title">适配器设计模式</div>
+        <div id="author-info">
+          <div class="text" id="author-name">Administrator</div>
+          <div class="text" id="share-time">2019-09-01</div>
+        </div>
+      </div>
+      <div id="main-content">
+        <div id="svg-container"><svg width="3367" xmlns:xlink="http://www.w3.org/1999/xlink" height="1587" xmlns:ev="http://www.w3.org/2001/xml-events" viewBox="0 0 3368 1587" id="page1" preserveAspectRadio="xMinYMin meet" xmlns="http://www.w3.org/2000/svg"><style type="text/css"><![CDATA[
+.st1 {fill:#000000;font-family:Arial;font-size:10pt}
+.st4 {fill:#118972;font-family:宋体;font-size:10pt}
+.st3 {fill:#1f6391;font-family:宋体;font-size:10pt}
+.st5 {fill:#1f6391}
+.st6 {fill:#236ea1;font-family:宋体;font-size:10pt}
+.st2 {fill:#ff0000}
+]]></style><defs/><rect width="3368" fill="#ffffff" y="0" height="1587" x="0" stroke="#808080"/><g transform="translate(407,317)" id="shape1"><path fill="#ffffff" d="M132,24L132,0L0,0L0,24L132,24z" stroke="#ffffff"/><text class="st1"><tspan y="16.4" x="32">接口适配器</tspan></text></g><g transform="translate(225.76,402.2)" id="shape2"><path fill="#ffffff" d="M671,84.8L671,0L0,0L0,84.8L671,84.8z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.4">当不需要全部实现接口提供的方法时，可先设计一个抽象类实现接口，并为该接口中每个方法提供一个默认实</tspan><tspan y="32.8" x="6.4">现（空方法），那么该抽象类的子类可有选择地覆盖父类的某些方法来实现需求，</tspan><tspan class="st2">它适用于一个接口不想使用</tspan><tspan y="49.6" class="st2" x="6.4">其所有的方法的情况。</tspan></text></g><g transform="translate(328,574.7)" id="table3"><g><path fill="#e8eff8" d="M0,0L345,0L345,53L0,53L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="24.1" x="125.8">&lt;&lt;Interface>></tspan><tspan y="39.3" x="114.6">AnimatorListener</tspan></text></g><g><path fill="#ffffff" d="M0,53L345,53L345,127L0,127L0,53z" stroke="#7e7e7e"/><text class="st3"><tspan y="72" x="11.4">+onAnimationStart(animation: Animator):void</tspan><tspan y="87.2" x="11.4">+onAnimationEnd(animation: Animator):void</tspan><tspan y="102.4" x="11.4">+onAnimationCancel(animation: Animator):void</tspan><tspan y="117.6" x="11.4">+onAnimationRepeat(animation: Animator):void</tspan></text></g></g><g transform="translate(335,771.2)" id="table4"><g><path fill="#e8eff8" d="M0,0L345,0L345,44L0,44L0,0z" stroke="#a0a0a4"/><text class="st4"><tspan y="19" class="st5" x="147.4">Adapter</tspan><tspan y="34.2" class="st5" x="89.8">AnimatorListenerAdapter</tspan></text></g><g><path fill="#ffffff" d="M0,44L345,44L345,73L0,73L0,44z" stroke="#a0a0a4"/><text class="st3"/></g><g><path fill="#ffffff" d="M0,73L345,73L345,147L0,147L0,73z" stroke="#a0a0a4"/><text class="st3"><tspan y="92.4" x="8.2">+onAnimationStart(animation: Animator):void</tspan><tspan y="107.6" x="8.2">+onAnimationEnd(animation: Animator):void</tspan><tspan y="122.8" x="8.2">+onAnimationCancel(animation: Animator):void</tspan><tspan y="138" x="8.2">+onAnimationRepeat(animation: Animator):void</tspan></text></g></g><g transform="translate(94.5,1020.7)" id="table5"><g><path fill="#e8eff8" d="M0,0L345,0L345,44L0,44L0,0z" stroke="#a0a0a4"/><text class="st6"><tspan y="19" x="140.2">Listener1</tspan><tspan y="34.2" x="125">（具体实现类）</tspan></text></g><g><path fill="#ffffff" d="M0,44L345,44L345,73L0,73L0,44z" stroke="#a0a0a4"/><text class="st3"/></g><g><path fill="#ffffff" d="M0,73L345,73L345,147L0,147L0,73z" stroke="#a0a0a4"/><text class="st3"><tspan y="92.4" x="8.2">+onAnimationStart(animation: Animator):void</tspan><tspan y="107.6" x="8.2">+onAnimationEnd(animation: Animator):void</tspan><tspan y="122.8" x="8.2">+onAnimationCancel(animation: Animator):void</tspan><tspan y="138" x="8.2">+onAnimationRepeat(animation: Animator):void</tspan></text></g></g><g transform="translate(557.5,1033.7)" id="table6"><g><path fill="#e8eff8" d="M0,0L345,0L345,44L0,44L0,0z" stroke="#a0a0a4"/><text class="st6"><tspan y="19" x="140.2">Listener2</tspan><tspan y="34.2" x="125">（具体实现类）</tspan></text></g><g><path fill="#ffffff" d="M0,44L345,44L345,73L0,73L0,44z" stroke="#a0a0a4"/><text class="st3"/></g><g><path fill="#ffffff" d="M0,73L345,73L345,147L0,147L0,73z" stroke="#a0a0a4"/><text class="st3"><tspan y="92.4" x="8.2">+onAnimationStart(animation: Animator):void</tspan><tspan y="107.6" x="8.2">+onAnimationEnd(animation: Animator):void</tspan><tspan y="122.8" x="8.2">+onAnimationCancel(animation: Animator):void</tspan><tspan y="138" x="8.2">+onAnimationRepeat(animation: Animator):void</tspan></text></g></g><g transform="translate(501,769.7)" id="shape7"><path fill="none" d="M0,0L0,-64.1" stroke="#118972" stroke-dasharray="2.5,2.5"/><path stroke-linecap="round" fill="none" d="M0,-71L-4,-64.1L4,-64.1L0,-71" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(267,1020.7)" id="shape8"><path fill="none" d="M0,0L0,-176L61.1,-176" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M68,-176L61.1,-180L61.1,-172L68,-176" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(745,1029.7)" id="shape9"><path fill="none" d="M0,0L0,-185L-58.1,-185" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M-65,-185L-58.1,-181L-58.1,-189L-65,-185" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(94.5,771.2)" id="shape10"><path fill="#ffffff" d="M132,36.7L132,0L0,0L0,36.7L132,36.7z" stroke="#ffffff"/><text class="st1"><tspan y="14.4" x="39.2">属性动画</tspan><tspan y="31.2" x="24">ValueAnimator</tspan></text></g><g transform="translate(1501.5,1055.5)" id="table11"><g><path fill="#e8eff8" d="M0,0L345,0L345,36.2L0,36.2L0,0z" stroke="#a0a0a4"/><text class="st4"><tspan y="19" class="st5" x="147.4">Adapter</tspan></text></g><g><path fill="#ffffff" d="M0,36.2L345,36.2L345,64.2L0,64.2L0,36.2z" stroke="#a0a0a4"/><text class="st3"/></g><g><path fill="#ffffff" d="M0,64.2L345,64.2L345,113.9L0,113.9L0,64.2z" stroke="#a0a0a4"/><text class="st3"><tspan y="79.1" x="8.2">+output5v();int</tspan><tspan y="94.3" x="8.2">+output220v():int - - （可以转化为220v,则执行</tspan><tspan y="109.5" x="8.2">这个方法）</tspan></text></g></g><g transform="translate(1276,746)" id="table12"><g><path fill="#e8eff8" d="M0,0L250,0L250,59L0,59L0,0z" stroke="#a0a0a4"/><text class="st6"><tspan y="19" x="78.6">&lt;&lt;interface>></tspan><tspan y="34.2" x="103.4">Target</tspan><tspan y="49.4" x="82.6">（Voltage5）</tspan></text></g><g><path fill="#ffffff" d="M0,59L250,59L250,88L0,88L0,59z" stroke="#a0a0a4"/><text class="st3"/></g><g><path fill="#ffffff" d="M0,88L250,88L250,133.4L0,133.4L0,88z" stroke="#a0a0a4"/><text class="st3"><tspan y="115.9" x="8.2">+output5V():int</tspan></text></g></g><g transform="translate(1418,545.88)" id="shape13"><path fill="#ffffff" d="M132,24L132,0L0,0L0,24L132,24z" stroke="#ffffff"/><text class="st1"><tspan y="16.4" x="39.2">类适配器</tspan></text></g><g transform="translate(1672,1054)" id="shape14"><path fill="none" d="M0,0L-263.2,-171.2" stroke="#118972" stroke-dasharray="11,5"/><path stroke-linecap="round" fill="none" d="M-269,-175L-265.4,-167.9L-261,-174.6L-269,-175" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(1672,1054)" id="shape15"><path fill="none" d="M0,0L250.3,-176" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M256,-180L248,-179.3L252.6,-172.7L256,-180" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(950,778.61)" id="table16"><g><path fill="#e8eff8" d="M0,0L122,0L122,36.7L0,36.7L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="23.6" x="41">调用者</tspan></text></g><g><path fill="#ffffff" d="M0,36.7L122,36.7L122,68.4L0,68.4L0,36.7z" stroke="#7e7e7e"/><text class="st3"/></g></g><g transform="translate(1072,812.8)" id="shape17"><path fill="none" d="M0,0L204,-0.1" stroke="#118972" stroke-dasharray="11,5"/><path stroke-linecap="round" fill="none" d="M199,-5.1L204,-0.1L199,4.9" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(2674,593)" id="shape18"><path fill="#ffffff" d="M132,24L132,0L0,0L0,24L132,24z" stroke="#ffffff"/><text class="st1"><tspan y="16.4" x="32">对象适配器</tspan></text></g><g transform="translate(2541.5,1011.57)" id="table19"><g><path fill="#e8eff8" d="M0,0L252.5,0L252.5,29L0,29L0,0z" stroke="#a0a0a4"/><text class="st4"><tspan y="19" class="st5" x="101">Adapter</tspan></text></g><g><path fill="#ffffff" d="M0,29L252.5,29L252.5,58L0,58L0,29z" stroke="#a0a0a4"/><text class="st3"><tspan y="48.7" x="8.2">volate:Volate220v</tspan></text></g><g><path fill="#ffffff" d="M0,58L252.5,58L252.5,117.7L0,117.7L0,58z" stroke="#a0a0a4"/><text class="st3"><tspan y="85.4" x="8.2">+output5v():void - - (判断对象存</tspan><tspan y="100.6" x="8.2">在不，存在者输出220v)</tspan></text></g></g><g transform="translate(2543.5,723)" id="table20"><g><path fill="#e8eff8" d="M0,0L250,0L250,61.4L0,61.4L0,0z" stroke="#a0a0a4"/><text class="st6"><tspan y="19" x="81.8">&lt;&lt;Inteface>></tspan><tspan y="34.2" x="82.6">Target(目标)</tspan><tspan y="49.4" x="93">(Volate5)</tspan></text></g><g><path fill="#ffffff" d="M0,61.4L250,61.4L250,91.6L0,91.6L0,61.4z" stroke="#a0a0a4"/><text class="st3"/></g><g><path fill="#ffffff" d="M0,91.6L250,91.6L250,130.4L0,130.4L0,91.6z" stroke="#a0a0a4"/><text class="st3"><tspan y="116.2" x="8.2">+output5v():void</tspan></text></g></g><g transform="translate(2963,1011.38)" id="table21"><g><path fill="#e8eff8" d="M0,0L240,0L240,59L0,59L0,0z" stroke="#a0a0a4"/><text class="st6"><tspan y="19" x="77">&lt;&lt;Inteface>></tspan><tspan y="34.2" x="94.6">Adapter</tspan><tspan y="49.4" x="80.2">(Volate220)</tspan></text></g><g><path fill="#ffffff" d="M0,59L240,59L240,88.1L0,88.1L0,59z" stroke="#a0a0a4"/><text class="st3"/></g><g><path fill="#ffffff" d="M0,88.1L240,88.1L240,134.6L0,134.6L0,88.1z" stroke="#a0a0a4"/><text class="st3"><tspan y="116.5" x="8.2">+specificRequest():void</tspan></text></g></g><g transform="translate(2667.75,1011.57)" id="shape22"><path fill="none" d="M0,0L.7,-151.2" stroke="#118972" stroke-dasharray="11,5"/><path stroke-linecap="round" fill="none" d="M.8,-158.2L-3.3,-151.2L4.7,-151.2L.8,-158.2" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(2173,750.67)" id="table23"><g><path fill="#e8eff8" d="M0,0L122,0L122,36.7L0,36.7L0,0z" stroke="#7e7e7e"/><text class="st3"><tspan y="23.6" x="41">调用者</tspan></text></g><g><path fill="#ffffff" d="M0,36.7L122,36.7L122,68.4L0,68.4L0,36.7z" stroke="#7e7e7e"/><text class="st3"/></g></g><g transform="translate(2295,784.87)" id="shape24"><path fill="none" d="M12.5,.2L248.5,3.3" stroke="#118972" stroke-dasharray="2.5,2.5"/><path stroke-linecap="round" fill="none" d="M0,0L6.2,3.7L12.5,.2L6.3,-3.5L0,0" stroke-width="1" stroke="#118972" stroke-linejoin="round"/><path stroke-linecap="round" fill="none" d="M243.6,-1.7L248.5,3.3L243.4,8.3" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(1804,739)" id="table25"><g><path fill="#e8eff8" d="M0,0L240,0L240,59L0,59L0,0z" stroke="#a0a0a4"/><text class="st6"><tspan y="19" x="87.4">&lt;&lt;Class>></tspan><tspan y="34.2" x="94.6">Adapter</tspan><tspan y="49.4" x="70.6">（Voltage220）</tspan></text></g><g><path fill="#ffffff" d="M0,59L240,59L240,88L0,88L0,59z" stroke="#a0a0a4"/><text class="st3"/></g><g><path fill="#ffffff" d="M0,88L240,88L240,134.4L0,134.4L0,88z" stroke="#a0a0a4"/><text class="st3"><tspan y="116.4" x="8.2">+output220v():int</tspan></text></g></g><g transform="translate(2790,1078.57)" id="shape26"><path fill="none" d="M12.5,0L173,0" stroke="#118972"/><path stroke-linecap="round" fill="none" d="M0,0L6.2,3.6L12.5,0L6.2,-3.6L0,0" stroke-width="1" stroke="#118972" stroke-linejoin="round"/></g><g transform="translate(648.75,156)" id="shape27"><path fill="#ffffff" d="M498.5,88L498.5,0L0,0L0,88L498.5,88z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.7">适配器模式:适配器模式</tspan><tspan class="st2">把一个类的接口变换成客户端所期待的另一种接口</tspan><tspan>，从而</tspan><tspan y="32.8" class="st2" x="6.7">使原本因接口不匹配而无法在一起工作的两个类能够在一起工作</tspan><tspan>。</tspan><tspan y="49.6" x="6.7">目标角色可以是类或接口。这里，我更倾向于是接口，因为我理解目标角色更倾</tspan><tspan y="66.4" x="6.7">向于一种接口规范。</tspan></text></g><g transform="translate(1339.5,595)" id="shape28"><path fill="#ffffff" d="M335,61L335,0L0,0L0,61L335,61z" stroke="#ffffff"/><text class="st1"><tspan y="18.1" x="16.8">缺点就是必须实现Target和Adaptee中的方法，</tspan><tspan class="st2">由于</tspan><tspan y="34.9" class="st2" x="13.6">Java不支持多继承，所以通常将Target设计成接口</tspan><tspan>，</tspan><tspan y="51.7" x="35.2">Adapter继承自Adaptee然后实现Target接口。</tspan></text></g><g transform="translate(649.5,253)" id="shape29"><path fill="#ffffff" d="M531.5,88L531.5,0L0,0L0,88L531.5,88z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.7">适配器模式的组成角色:</tspan><tspan y="32.8" x="6.7">目标角色（Target）：适配所期待的得到的接口，目标角色可以是类或接口。这里，我</tspan><tspan y="49.6" x="6.7">更倾向于是接口，因为我理解目标角色更倾向于一种接口规范。</tspan><tspan y="66.4" x="6.7">源角色（Adaptee）：需要适配的接口或类。</tspan><tspan y="83.2" x="6.7">适配器（Adapter）：适配器模式的核心。通过继承或实现将源角色转换成目标角色接</tspan><tspan y="100" x="6.7">口。</tspan></text></g><path fill="none" d="M19,0C19,0,9.4,26.6,9.4,103.2L9.4,512.9C9.4,512.9,8.2,545.8,6,572.9C3.8,599.9,0,614.5,0,614.5C0,614.5,4,628.4,6,652.8C8.4,680.6,9.4,716.1,9.4,716.1L9.4,1152.4C9.4,1152.4,11,1233,19,1233" transform="matrix(0,1,-1,0,2915,439)" stroke="#000000" id="shape30"/><g transform="translate(1965,335)" id="shape31"><path fill="#ffffff" d="M794,85L794,0L0,0L0,85L794,85z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.4">适配器其实是分为对象适配器和类适配器两种，两种的工作原理不太一样。</tspan><tspan y="32.8" x="6.4">1</tspan><tspan class="st2">.对象适配器是使用组合的方法</tspan><tspan>，</tspan><tspan class="st2">在Adapter中会保留一个原对象（Adaptee）的引用</tspan><tspan>，适配器的实现就是</tspan><tspan class="st2">讲Target中的方法委派给</tspan><tspan y="49.6" class="st2" x="6.4">Adaptee对象来做</tspan><tspan>，用Adaptee中的方法实现Target中的方法。</tspan><tspan y="66.4" x="6.4">2.类适配器：</tspan><tspan class="st2">用的是类似多继承方式是实现的（java不支持多继承，因此Target是接口）</tspan></text></g><g transform="translate(1277.5,132)" id="shape32"><path fill="#ffffff" d="M498.5,279L498.5,0L0,0L0,279L498.5,279z" stroke="#ffffff"/><text class="st1"><tspan y="16" class="st2" x="6.7">1.优点：</tspan><tspan>由于适配器类是适配者类的子类，</tspan><tspan class="st2">因此可以在适配器类中置换一些适配</tspan><tspan y="32.8" class="st2" x="6.7">者的方法，使得适配器的灵活性更强。</tspan><tspan y="49.6" class="st2" x="6.7">2.缺点：</tspan><tspan y="66.4" x="6.7">类适配器模式的缺点如下： </tspan><tspan y="83.2" x="6.7">对于Java、C#等不支持多重继承的语言，一次最多只能适配一个适配者类，而且</tspan><tspan y="100" x="6.7">目标抽象类只能为抽象类，不能为具体类，其使用有一定的局限性，不能将一个</tspan><tspan y="116.8" x="6.7">适配者类和它的子类都适配到目标接口。</tspan><tspan y="133.6" x="6.7">对象适配器模式的缺点如下： </tspan><tspan y="150.4" x="6.7">与类适配器模式相比，要想置换适配者类的方法就不容易。如果一定要置换掉适</tspan><tspan y="167.2" x="6.7">配者类的一个或多个方法，就只好先做一个适配者类的子类，将适配者类的方法</tspan><tspan y="184" x="6.7">置换掉，然后再把适配者类的子类当做真正的适配者进行适配，实现过程较为复</tspan><tspan y="200.8" x="6.7">杂。</tspan><tspan y="217.6" class="st2" x="6.7">3.适用环境</tspan><tspan y="234.4" x="6.7">1、</tspan><tspan class="st2">系统需要使用现有的类，而这些类的接口不符合系统的需要</tspan><tspan>。 </tspan><tspan y="251.2" x="6.7">2、</tspan><tspan class="st2">想要建立一个可以重复使用的类，用于与一些彼此之间没有太大关联的一些</tspan><tspan y="268" class="st2" x="6.7">类，包括一些可能在将来引进的类一起工作。</tspan></text></g><g transform="translate(1759.5,606.5)" id="shape33"><path fill="#ffffff" d="M498.5,38L498.5,0L0,0L0,38L498.5,38z" stroke="#ffffff"/><text class="st1"><tspan y="16" x="6.7">使用场景：判断是否可以转化为指定接口，如果可以则转化·，并执行该接口的方</tspan><tspan y="32.8" x="6.7">法</tspan></text></g></svg></div>
+        <div id="copyright">Powered by <a href="https://www.edrawsoft.com/" target="_blank" title="edrawsoft">Edraw Max</a></div>
+      </div>
+      <div id="navBar">
+        <div id="nav-thumbs">
+          <div class="nav-thumb">
+            <div>
+              <span class="number">
+                <span class="pagenum">1</span>
+              </span>
+              <a href="#page1">
+                <img src="data:image/png;base64,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"/>
+              </a>
+            </div>
+            <p>页-1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        const svgs=document.getElementById("svg-container").children;
+        const UA=window.navigator.userAgent;
+        const ua=(UA.indexOf('rv:11')+UA.indexOf('Firefox'))>=0;
+        const svgcount=document.getElementById('svg-container').childElementCount;
+        var styleArr=[];
+        var heightArr=[];
+        var navBar=document.getElementById('navBar');
+        var conInfo=document.getElementById('content-info');
+        for(var i=0;i<svgcount;i++){
+            styleArr[i] = {width:svgs[i].getAttribute('width'),height:svgs[i].getAttribute('height')}
+        }
+        window.onresize=function () {
+            renavstyle();
+            resvgstyle();
+        };
+        window.onscroll=renavstyle;
+        window.onload=function () {
+            renavstyle();
+            var sideWidth=navBar.offsetWidth;
+            document.getElementById('content-info').style.marginRight=sideWidth+'px';
+            document.getElementById('main-content').style.marginRight=sideWidth+'px';
+            resvgstyle();
+            doscroll();
+        };
+        function recontainstyle() {
+            var topHeight=conInfo.clientHeight;
+            var svgHeight=0;
+            for(var i=0;i<svgcount;i++){
+                heightArr[i]=svgs[i].getBoundingClientRect().height+10;
+                svgHeight+=svgs[i].clientHeight ||svgs[i].getBoundingClientRect().height;
+            }
+            var fullHeight=svgHeight+Number(topHeight);
+            if(fullHeight<window.innerHeight){
+            document.getElementById('copyright').style.position='absolute';
+            document.getElementById('copyright').style.transform ='translateX(-50%)';
+            document.getElementById('main-content').style.position='absolute';
+            document.getElementById('main-content').style.top=topHeight+'px';
+        }else{
+            document.getElementById('copyright').style.position='';
+            document.getElementById('copyright').style.transform ='';
+            document.getElementById('main-content').style.position='';
+        }
+        }
+        function resvgstyle() {
+            var sideWidth=navBar.offsetWidth+20;
+            for(var i=0;i<svgcount;i++){
+                var oriWidth = styleArr[i].width;
+                var oriHeight = styleArr[i].height;
+                var percent = oriHeight / oriWidth;
+                var innerWidth=document.body.offsetWidth-sideWidth;
+                if (innerWidth <= oriWidth) {
+                    svgs[i].removeAttribute('width');
+                    svgs[i].removeAttribute('height');
+                    if (ua) {
+                        svgs[i].setAttribute('height',innerWidth*percent);
+                    }
+                }else {
+                    svgs[i].setAttribute('width', oriWidth);
+                    svgs[i].setAttribute('height', oriHeight);
+                }
+            }
+            recontainstyle();
+        }
+        function renavstyle() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            if(scrollTop>topHeight){
+                document.getElementById('navBar').style.top=0+'px';
+            }else{
+                document.getElementById('navBar').style.top=topHeight-scrollTop+'px';
+            }
+            doscroll();
+        }
+        function doscroll() {
+            var topHeight=conInfo.clientHeight;
+            var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+            for(var i=0;i<svgcount;i++){
+                var sum=0;
+                for(var j=0;j<=i;j++){
+                    sum+=heightArr[j];
+                }
+                if(scrollTop+window.innerHeight/2-topHeight-sum<0){
+                    var sub=Number(i)+1;
+                    if(document.querySelector('#nav-thumbs .selected')){
+                        document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                    }
+                    document.querySelector('.nav-thumb:nth-of-type('+sub+')').classList.add('selected');
+                    break;
+                }
+            }
+        }
+        var navs=document.querySelectorAll('.nav-thumb');
+        for(i=0;i<navs.length;i++){
+            navs[i].children[0].onclick=function () {
+                document.querySelector('#nav-thumbs .selected').classList.remove('selected');
+                this.parentNode.classList.add('selected');
+            }
+        }
+</script>
+  </body>
+</html>
