@@ -75,13 +75,13 @@ interface Consumor<in T>{
 }
 
 //设置多个上界
-class Monster<T> where T: Animal, T:Food{
+class Monster<T> where T: Animal, T:Food{
 
 }
 
 
-//可以用reified解除 is限制,同时要加inline
-inline fun <refied T> test(){
+//可以用reified解除 is限制,同时要加inline
+inline fun <refied T> test(){
     if(item is T){
 
     }
