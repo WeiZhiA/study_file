@@ -44,6 +44,9 @@ Chain [tʃeɪn]
 
 <!-- /TOC -->
 
+OkHttp原理
+https://juejin.cn/post/6844904087788453896
+
 # 1.Okhttp简介
 
 <img src="image/okhttp_6.png" height="400" />
@@ -589,6 +592,15 @@ OkHttp将整个请求的复杂逻辑切成了一个一个的独立模块并命�
 如果有 request body，就向服务器发送
 读取 response header，先构造一个 Response 对象
 如果有 response body，就在 3 的基础上加上 body 构造一个新的 Response 对象
+
+# 补充
+每个OkHttpClient对象都有自己的线程池和连接池，如果为每个请求都创建一个client对象，自然会出现内存溢出。所以官方建议OkHttpClient应该单例化，重用连接和线程能降低延迟和减少内存消耗。
+
+
+1.域名切换，在interceptor拦截器中，替换真正的url
+2.公用连接池,
+okHttpclient.newBuilder()
+同一个OkhttpClict创建的builder和原始的client共享相同的连接池,线程池，以及配置.
 
 # 参考文档
 
